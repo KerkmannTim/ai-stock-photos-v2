@@ -63,68 +63,79 @@
         <p>Je höher der Score, desto höher die Bildqualität. Du zahlst nur für die Qualität, die du brauchst.</p>
       </div>
 
-      <div class="pricing-grid ten-tier">
-
-        <div class="pricing-card">
-          <div class="score-range">Score 0 – 10</div>
-          <div class="price">€0.09</div>
-          <div class="price-per">pro Bild</div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="score-range">Score 10 – 20</div>
-          <div class="price">€0.19</div>
-          <div class="price-per">pro Bild</div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="score-range">Score 20 – 30</div>
-          <div class="price">€0.29</div>
-          <div class="price-per">pro Bild</div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="score-range">Score 30 – 40</div>
-          <div class="price">€0.39</div>
-          <div class="price-per">pro Bild</div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="score-range">Score 40 – 50</div>
-          <div class="price">€0.49</div>
-          <div class="price-per">pro Bild</div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="score-range">Score 50 – 60</div>
-          <div class="price">€0.59</div>
-          <div class="price-per">pro Bild</div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="score-range">Score 60 – 70</div>
-          <div class="price">€0.69</div>
-          <div class="price-per">pro Bild</div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="score-range">Score 70 – 80</div>
-          <div class="price">€0.79</div>
-          <div class="price-per">pro Bild</div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="score-range">Score 80 – 90</div>
-          <div class="price">€0.89</div>
-          <div class="price-per">pro Bild</div>
-        </div>
-
-        <div class="pricing-card featured">
-          <div class="score-range">Score 90 – 100</div>
-          <div class="price">€0.99</div>
-          <div class="price-per">pro Bild</div>
-        </div>
-
+      <div class="score-table-wrapper">
+        <table class="score-table">
+          <thead>
+            <tr>
+              <th>Score-Bereich</th>
+              <th>Preis pro Bild</th>
+              <th>Qualitätslevel</th>
+              <th>Beispiel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Score"><span class="score-badge score-0">0 – 10</span></td>
+              <td data-label="Preis"><span class="price-tag">€0.09</span></td>
+              <td data-label="Qualität">Basis-Qualität</td>
+              <td data-label="Beispiel"><div class="score-preview" style="--score-color: #6b7280;"></div></td>
+            </tr>
+            <tr>
+              <td data-label="Score"><span class="score-badge score-10">10 – 20</span></td>
+              <td data-label="Preis"><span class="price-tag">€0.19</span></td>
+              <td data-label="Qualität">Einfache Qualität</td>
+              <td data-label="Beispiel"><div class="score-preview" style="--score-color: #78716c;"></div></td>
+            </tr>
+            <tr>
+              <td data-label="Score"><span class="score-badge score-20">20 – 30</span></td>
+              <td data-label="Preis"><span class="price-tag">€0.29</span></td>
+              <td data-label="Qualität">Standard-Qualität</td>
+              <td data-label="Beispiel"><div class="score-preview" style="--score-color: #a16207;"></div></td>
+            </tr>
+            <tr>
+              <td data-label="Score"><span class="score-badge score-30">30 – 40</span></td>
+              <td data-label="Preis"><span class="price-tag">€0.39</span></td>
+              <td data-label="Qualität">Gute Qualität</td>
+              <td data-label="Beispiel"><div class="score-preview" style="--score-color: #d97706;"></div></td>
+            </tr>
+            <tr>
+              <td data-label="Score"><span class="score-badge score-40">40 – 50</span></td>
+              <td data-label="Preis"><span class="price-tag">€0.49</span></td>
+              <td data-label="Qualität">Sehr gute Qualität</td>
+              <td data-label="Beispiel"><div class="score-preview" style="--score-color: #f59e0b;"></div></td>
+            </tr>
+            <tr>
+              <td data-label="Score"><span class="score-badge score-50">50 – 60</span></td>
+              <td data-label="Preis"><span class="price-tag">€0.59</span></td>
+              <td data-label="Qualität">Hochwertige Qualität</td>
+              <td data-label="Beispiel"><div class="score-preview" style="--score-color: #ea580c;"></div></td>
+            </tr>
+            <tr>
+              <td data-label="Score"><span class="score-badge score-60">60 – 70</span></td>
+              <td data-label="Preis"><span class="price-tag">€0.69</span></td>
+              <td data-label="Qualität">Premium-Qualität</td>
+              <td data-label="Beispiel"><div class="score-preview" style="--score-color: #dc2626;"></div></td>
+            </tr>
+            <tr>
+              <td data-label="Score"><span class="score-badge score-70">70 – 80</span></td>
+              <td data-label="Preis"><span class="price-tag">€0.79</span></td>
+              <td data-label="Qualität">Exzellente Qualität</td>
+              <td data-label="Beispiel"><div class="score-preview" style="--score-color: #7c3aed;"></div></td>
+            </tr>
+            <tr class="popular-row">
+              <td data-label="Score"><span class="score-badge score-80">80 – 90 <span class="popular-badge">★ Am beliebtesten</span></span></td>
+              <td data-label="Preis"><span class="price-tag">€0.89</span></td>
+              <td data-label="Qualität">Top-Qualität</td>
+              <td data-label="Beispiel"><div class="score-preview" style="--score-color: #2563eb;"></div></td>
+            </tr>
+            <tr>
+              <td data-label="Score"><span class="score-badge score-90">90 – 100</span></td>
+              <td data-label="Preis"><span class="price-tag">€0.99</span></td>
+              <td data-label="Qualität">Meisterklasse</td>
+              <td data-label="Beispiel"><div class="score-preview" style="--score-color: #16a34a;"></div></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <!-- ===== CREDITS AUFADEN ===== -->
@@ -138,26 +149,26 @@
         <div class="pricing-card">
           <div class="credit-amount">€5</div>
           <div class="price-per">Guthaben</div>
-          <a href="#" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 1rem;">Aufladen</a>
+          <a href="#" class="btn btn-secondary">Aufladen</a>
         </div>
 
         <div class="pricing-card">
           <div class="credit-amount">€10</div>
           <div class="price-per">Guthaben</div>
-          <a href="#" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 1rem;">Aufladen</a>
+          <a href="#" class="btn btn-secondary">Aufladen</a>
         </div>
 
         <div class="pricing-card">
           <div class="credit-amount">€25</div>
           <div class="price-per">Guthaben</div>
-          <a href="#" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 1rem;">Aufladen</a>
+          <a href="#" class="btn btn-secondary">Aufladen</a>
         </div>
 
         <div class="pricing-card recommended">
           <div class="badge">Empfohlen für häufige Käufer</div>
           <div class="credit-amount">€50</div>
           <div class="price-per">Guthaben</div>
-          <a href="#" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 1rem;">Aufladen</a>
+          <a href="#" class="btn btn-primary">Aufladen</a>
         </div>
 
       </div>
@@ -179,7 +190,7 @@
             <li>20% Rabatt auf Einzelkäufe</li>
             <li>Jederzeit kündbar</li>
           </ul>
-          <a href="#" class="btn btn-secondary btn-sm" style="width: 100%;">Abo wählen</a>
+          <a href="#" class="btn btn-secondary">Abo wählen</a>
         </div>
 
         <div class="pricing-card featured">
@@ -192,7 +203,7 @@
             <li>25% Rabatt auf Einzelkäufe</li>
             <li>Jederzeit kündbar</li>
           </ul>
-          <a href="#" class="btn btn-primary btn-sm" style="width: 100%;">Abo wählen</a>
+          <a href="#" class="btn btn-primary">Abo wählen</a>
         </div>
 
         <div class="pricing-card">
@@ -204,7 +215,7 @@
             <li>35% Rabatt auf Einzelkäufe</li>
             <li>Jederzeit kündbar</li>
           </ul>
-          <a href="#" class="btn btn-secondary btn-sm" style="width: 100%;">Abo wählen</a>
+          <a href="#" class="btn btn-secondary">Abo wählen</a>
         </div>
 
         <div class="pricing-card">
@@ -216,7 +227,7 @@
             <li>40% Rabatt auf Einzelkäufe</li>
             <li>Prioritäts-Support</li>
           </ul>
-          <a href="#" class="btn btn-secondary btn-sm" style="width: 100%;">Abo wählen</a>
+          <a href="#" class="btn btn-secondary">Abo wählen</a>
         </div>
 
       </div>

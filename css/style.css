@@ -765,6 +765,109 @@ button {
 }
 
 /* ============================================
+   SCORE TABLE (NEU)
+   ============================================ */
+.score-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 48px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.score-table thead {
+  background: var(--bg-tertiary);
+}
+
+.score-table th,
+.score-table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.score-table th {
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.score-table tbody tr {
+  transition: background var(--transition);
+}
+
+.score-table tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+.score-table tbody tr.popular-row {
+  background: rgba(59, 130, 246, 0.05);
+  border-left: 3px solid var(--accent);
+}
+
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+}
+
+.score-badge.score-0  { color: #9ca3af; border-color: #6b7280; }
+.score-badge.score-10 { color: #a8a29e; border-color: #78716c; }
+.score-badge.score-20 { color: #d4d4d8; border-color: #a16207; }
+.score-badge.score-30 { color: #fcd34d; border-color: #d97706; }
+.score-badge.score-40 { color: #fbbf24; border-color: #f59e0b; }
+.score-badge.score-50 { color: #fdba74; border-color: #ea580c; }
+.score-badge.score-60 { color: #fca5a5; border-color: #dc2626; }
+.score-badge.score-70 { color: #c4b5fd; border-color: #7c3aed; }
+.score-badge.score-80 { color: #93c5fd; border-color: #2563eb; }
+.score-badge.score-90 { color: #86efac; border-color: #16a34a; }
+
+.popular-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.price-tag {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.score-preview {
+  width: 48px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--score-color);
+  display: inline-block;
+}
+
+/* ============================================
    PRICING
    ============================================ */
 .pricing-grid {
@@ -1501,6 +1604,10 @@ button {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .credits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -1534,6 +1641,14 @@ button {
   }
 
   .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .credits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .abo-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1590,6 +1705,153 @@ button {
   .modal-sidebar {
     padding: 20px;
   }
+
+  /* === SCORE TABLE MOBILE === */
+  .score-table thead {
+    display: none;
+  }
+
+  .score-table,
+  .score-table tbody,
+  .score-table tr,
+  .score-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .score-table tr {
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+
+  .score-table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+
+  .score-table td:last-child {
+    border-bottom: none;
+  }
+
+  .score-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .score-table td[data-label="Score"]::before {
+    display: none;
+  }
+
+  .score-table td[data-label="Score"] {
+    justify-content: flex-start;
+    background: var(--bg-tertiary);
+  }
+
+  .score-table tbody tr.popular-row {
+    border-left: 3px solid var(--accent);
+  }
+
+  .score-badge {
+    font-size: 0.85rem;
+  }
+
+  .popular-badge {
+    font-size: 0.65rem;
+  }
+
+  /* === PAGE HEADER MOBILE === */
+  .page-header {
+    padding: 100px 16px 32px;
+  }
+
+  .page-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .page-header p {
+    font-size: 0.95rem;
+  }
+
+  /* === PRICING CARDS MOBILE === */
+  .pricing-card {
+    padding: 20px 16px;
+  }
+
+  .pricing-card .price {
+    font-size: 2rem;
+  }
+
+  /* === BUTTONS MOBILE === */
+  .btn,
+  .btn-sm,
+  .btn-lg {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* === SECTION SPACING === */
+  .section {
+    padding: 48px 0;
+  }
+
+  .section-intro {
+    margin-top: 2.5rem !important;
+  }
+
+  .section-intro h2 {
+    font-size: 1.3rem;
+  }
+
+  .section-intro p {
+    font-size: 0.9rem;
+  }
+
+  /* === CALC TABLE === */
+  .calc-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .calc-table th,
+  .calc-table td {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  /* === SCORE INFO === */
+  .score-info {
+    padding: 20px;
+  }
+
+  .score-steps {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .score-step {
+    gap: 10px;
+  }
+
+  /* === NAVBAR === */
+  .navbar-inner {
+    height: 56px;
+  }
+
+  /* === CONTAINER === */
+  .container {
+    padding: 0 16px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1613,5 +1875,15 @@ button {
 
   .gallery-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Pricing cards full-width buttons */
+  .pricing-card .btn {
+    width: 100%;
+    margin-top: 0.75rem;
+  }
+
+  .pricing-card .features li {
+    font-size: 0.8rem;
   }
 }
