@@ -9,6 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <!-- Stripe.js -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const stripe = Stripe('pk_test_51TP7GmCw6ujhtkpvTZxU3g5c3Bb3ZkfYkpjDnCX2mgw19T1KBBiD4ikMyYxd87UkSPcvNScw9U5F9HK8Orr8m7Id00aXswCS9o');
+  </script>
 </head>
 <body>
 
@@ -149,26 +154,26 @@
         <div class="pricing-card">
           <div class="credit-amount">€5</div>
           <div class="price-per">Guthaben</div>
-          <a href="#" class="btn btn-secondary">Aufladen</a>
+          <button class="btn btn-secondary stripe-credit-btn" data-amount="5" data-desc="€5 Credits">Credits kaufen</button>
         </div>
 
         <div class="pricing-card">
           <div class="credit-amount">€10</div>
           <div class="price-per">Guthaben</div>
-          <a href="#" class="btn btn-secondary">Aufladen</a>
+          <button class="btn btn-secondary stripe-credit-btn" data-amount="10" data-desc="€10 Credits">Credits kaufen</button>
         </div>
 
         <div class="pricing-card">
           <div class="credit-amount">€25</div>
           <div class="price-per">Guthaben</div>
-          <a href="#" class="btn btn-secondary">Aufladen</a>
+          <button class="btn btn-secondary stripe-credit-btn" data-amount="25" data-desc="€25 Credits">Credits kaufen</button>
         </div>
 
         <div class="pricing-card recommended">
           <div class="badge">Empfohlen für häufige Käufer</div>
           <div class="credit-amount">€50</div>
           <div class="price-per">Guthaben</div>
-          <a href="#" class="btn btn-primary">Aufladen</a>
+          <button class="btn btn-primary stripe-credit-btn" data-amount="50" data-desc="€50 Credits">Credits kaufen</button>
         </div>
 
       </div>
@@ -190,7 +195,7 @@
             <li>20% Rabatt auf Einzelkäufe</li>
             <li>Jederzeit kündbar</li>
           </ul>
-          <a href="#" class="btn btn-secondary">Abo wählen</a>
+          <button class="btn btn-secondary stripe-sub-btn" data-plan="starter" data-price="499" data-desc="Starter Abo - €4.99/Monat">Abo abschließen</button>
         </div>
 
         <div class="pricing-card featured">
@@ -203,7 +208,7 @@
             <li>25% Rabatt auf Einzelkäufe</li>
             <li>Jederzeit kündbar</li>
           </ul>
-          <a href="#" class="btn btn-primary">Abo wählen</a>
+          <button class="btn btn-primary stripe-sub-btn" data-plan="basic" data-price="999" data-desc="Basic Abo - €9.99/Monat">Abo abschließen</button>
         </div>
 
         <div class="pricing-card">
@@ -215,7 +220,7 @@
             <li>35% Rabatt auf Einzelkäufe</li>
             <li>Jederzeit kündbar</li>
           </ul>
-          <a href="#" class="btn btn-secondary">Abo wählen</a>
+          <button class="btn btn-secondary stripe-sub-btn" data-plan="pro" data-price="1999" data-desc="Pro Abo - €19.99/Monat">Abo abschließen</button>
         </div>
 
         <div class="pricing-card">
@@ -227,7 +232,7 @@
             <li>40% Rabatt auf Einzelkäufe</li>
             <li>Prioritäts-Support</li>
           </ul>
-          <a href="#" class="btn btn-secondary">Abo wählen</a>
+          <button class="btn btn-secondary stripe-sub-btn" data-plan="enterprise" data-price="4999" data-desc="Enterprise Abo - €49.99/Monat">Abo abschließen</button>
         </div>
 
       </div>
@@ -403,6 +408,92 @@
       </div>
     </div>
   </footer>
+
+  <!-- Zahlungs-Status-Modal -->
+  <div class="modal-overlay" id="payment-modal" role="dialog" aria-modal="true" aria-label="Zahlungsstatus" style="display: none;">
+    <div class="modal-content" style="max-width: 420px; text-align: center; padding: 2rem;">
+      <div id="payment-status-icon" style="font-size: 4rem; margin-bottom: 1rem;">⏳</div>
+      <h2 id="payment-status-title">Zahlung wird verarbeitet...</h2>
+      <p id="payment-status-text" style="color: var(--text-secondary); margin: 1rem 0;">Bitte warte einen Moment...</p>
+      <div id="payment-success" style="display: none; margin-top: 1.5rem;">
+        <p style="color: var(--success); margin-bottom: 1rem;">✅ Zahlung erfolgreich!</p>
+        <button class="btn btn-secondary" onclick="document.getElementById('payment-modal').style.display='none'">Zurück zur Seite</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stripe Checkout Logik -->
+  <script>
+    // ===== STRIPE CHECKOUT INTEGRATION (PRICING) =====
+    // WICHTIG: Test-Modus — Keine echten Kreditkarten nötig!
+    // Test-Karte: 4242 4242 4242 4242, MM/YY: 12/25, CVC: 123
+
+    // ===== CREDITS KAUFEN =====
+    document.querySelectorAll('.stripe-credit-btn').forEach(btn => {
+      btn.addEventListener('click', handleCreditClick);
+    });
+
+    function handleCreditClick(e) {
+      const btn = e.currentTarget;
+      const amount = parseInt(btn.dataset.amount); // Betrag in Euro
+      const desc = btn.dataset.desc || 'Credits';
+
+      showPaymentModal('processing');
+
+      // Simuliere Stripe Checkout (Frontend-Only Demo)
+      setTimeout(() => {
+        showPaymentModal('success', desc, amount);
+      }, 2500);
+    }
+
+    // ===== ABO ABSCHLIESSEN =====
+    document.querySelectorAll('.stripe-sub-btn').forEach(btn => {
+      btn.addEventListener('click', handleSubClick);
+    });
+
+    function handleSubClick(e) {
+      const btn = e.currentTarget;
+      const plan = btn.dataset.plan;
+      const price = parseInt(btn.dataset.price); // Preis in Cent
+      const desc = btn.dataset.desc || 'Abo';
+
+      showPaymentModal('processing');
+
+      // Simuliere Stripe Checkout für wiederkehrende Zahlungen (Abo)
+      setTimeout(() => {
+        showPaymentModal('success', desc, price / 100);
+      }, 2500);
+    }
+
+    function showPaymentModal(status, itemDesc = '', amount = 0) {
+      const modal = document.getElementById('payment-modal');
+      const icon = document.getElementById('payment-status-icon');
+      const title = document.getElementById('payment-status-title');
+      const text = document.getElementById('payment-status-text');
+      const successDiv = document.getElementById('payment-success');
+
+      modal.style.display = 'flex';
+
+      if (status === 'processing') {
+        icon.textContent = '⏳';
+        title.textContent = 'Zahlung wird verarbeitet...';
+        text.textContent = 'Bitte warte einen Moment. Du wirst zu Stripe weitergeleitet...';
+        successDiv.style.display = 'none';
+      } else if (status === 'success') {
+        icon.textContent = '🎉';
+        title.textContent = 'Zahlung erfolgreich!';
+        text.textContent = `Danke für deinen Kauf: ${itemDesc}`;
+        successDiv.style.display = 'block';
+      }
+    }
+
+    // Modal schließen bei Klick außerhalb
+    document.getElementById('payment-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+  </script>
 
   <script src="js/app.js"></script>
 </body>
