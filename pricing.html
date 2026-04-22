@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preise — AI Stock Photos</title>
-  <meta name="description" content="Flexible Preismodelle für KI-generierte Stockfotos. Basic, Pro und Enterprise — finden Sie den passenden Plan.">
+  <title>Preise — StockPhotoShop</title>
+  <meta name="description" content="Transparentes Preismodell basierend auf Qualitätsscore. Ab €0,39 pro Bild.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,219 +12,223 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="nav-container">
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Hauptnavigation">
+    <div class="container navbar-inner">
       <a href="index.html" class="logo">
-        <div class="logo-icon">AI</div>
-        <span>Stock Photos</span>
+        <span class="logo-icon">📸</span>
+        <span>StockPhotoShop</span>
       </a>
-      <nav class="nav-links">
-        <a href="gallery.html">Galerie</a>
-        <a href="pricing.html" class="active">Preise</a>
-        <a href="about.html">Über uns</a>
-      </nav>
-      <div class="header-search">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Suchen..." aria-label="Suche">
-      </div>
-      <div class="header-actions">
-        <a href="auth.html" class="btn btn-ghost btn-sm" id="auth-btn">Anmelden</a>
-        <div class="user-menu hidden" id="user-menu" style="display:none;">
-          <div class="avatar-placeholder">U</div>
-          <img class="avatar-img hidden" alt="Profil" style="display:none;">
-          <span class="user-name">User</span>
-        </div>
-      </div>
-      <div class="menu-toggle" aria-label="Menü öffnen" role="button" tabindex="0">
-        <span></span><span></span><span></span>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Galerie</a></li>
+        <li><a href="pricing.html" class="active">Preise</a></li>
+        <li><a href="about.html">Über uns</a></li>
+        <li><a href="profile.html">Login</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <div class="mobile-nav">
-    <a href="index.html">Startseite</a>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" aria-hidden="true">
+    <a href="index.html">Home</a>
     <a href="gallery.html">Galerie</a>
     <a href="pricing.html" class="active">Preise</a>
     <a href="about.html">Über uns</a>
-    <a href="auth.html" id="mobile-auth-link">Anmelden</a>
+    <a href="profile.html">Login</a>
   </div>
 
-  <section class="section" style="padding-top:32px;">
+  <!-- Page Header -->
+  <header class="page-header">
     <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Preise</span>
-        <h2 class="section-title">Wählen Sie Ihren Plan</h2>
-        <p class="section-desc">Flexibel, fair und ohne versteckte Kosten. Jederzeit kündbar. Erhalten Sie mit jedem Plan volle Royalty-Free-Lizenz.</p>
+      <h1>Preismodell</h1>
+      <p>Transparente Preise basierend auf unserem einzigartigen Qualitätsscore. Je höher der Score, desto höher die Bildqualität.</p>
+    </div>
+  </header>
+
+  <!-- Pricing Cards -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <div class="pricing-grid">
+
+        <!-- Tier 1 -->
+        <div class="pricing-card">
+          <div class="score-range">Score 0 – 50</div>
+          <div class="price">€0.39</div>
+          <div class="price-per">pro Bild</div>
+          <ul class="features">
+            <li>Standardqualität</li>
+            <li>Web-Auflösung verfügbar</li>
+            <li>Lizenzfreie Nutzung</li>
+            <li>Keine Attribution nötig</li>
+            <li>Sofortiger Download</li>
+          </ul>
+          <a href="gallery.html" class="btn btn-secondary btn-sm" style="width: 100%;">Bilder ansehen</a>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="pricing-card">
+          <div class="score-range">Score 51 – 70</div>
+          <div class="price">€0.59</div>
+          <div class="price-per">pro Bild</div>
+          <ul class="features">
+            <li>Gute Qualität</li>
+            <li>Full-HD Auflösung</li>
+            <li>Lizenzfreie Nutzung</li>
+            <li>Keine Attribution nötig</li>
+            <li>Sofortiger Download</li>
+          </ul>
+          <a href="gallery.html" class="btn btn-secondary btn-sm" style="width: 100%;">Bilder ansehen</a>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="pricing-card">
+          <div class="score-range">Score 71 – 85</div>
+          <div class="price">€0.79</div>
+          <div class="price-per">pro Bild</div>
+          <ul class="features">
+            <li>Hohe Qualität</li>
+            <li>4K Auflösung</li>
+            <li>Lizenzfreie Nutzung</li>
+            <li>Keine Attribution nötig</li>
+            <li>Sofortiger Download</li>
+          </ul>
+          <a href="gallery.html" class="btn btn-secondary btn-sm" style="width: 100%;">Bilder ansehen</a>
+        </div>
+
+        <!-- Tier 4 -->
+        <div class="pricing-card featured">
+          <div class="score-range">Score 86 – 95</div>
+          <div class="price">€0.99</div>
+          <div class="price-per">pro Bild</div>
+          <ul class="features">
+            <li>Sehr hohe Qualität</li>
+            <li>4K+ Auflösung</li>
+            <li>Lizenzfreie Nutzung</li>
+            <li>Keine Attribution nötig</li>
+            <li>Sofortiger Download</li>
+          </ul>
+          <a href="gallery.html" class="btn btn-primary btn-sm" style="width: 100%;">Beliebteste Wahl</a>
+        </div>
+
+        <!-- Tier 5 -->
+        <div class="pricing-card">
+          <div class="score-range">Score 96 – 100</div>
+          <div class="price">€1.99</div>
+          <div class="price-per">pro Bild</div>
+          <ul class="features">
+            <li>Premium Qualität</li>
+            <li>Höchste Auflösung</li>
+            <li>Lizenzfreie Nutzung</li>
+            <li>Keine Attribution nötig</li>
+            <li>Sofortiger Download</li>
+          </ul>
+          <a href="gallery.html" class="btn btn-secondary btn-sm" style="width: 100%;">Premium Bilder</a>
+        </div>
+
       </div>
 
-      <div class="pricing-grid fade-in">
-        <!-- Basic -->
-        <div class="pricing-card">
-          <div class="plan-name">Basic</div>
-          <div class="plan-desc">Perfekt für Hobby und kleine Projekte</div>
-          <div class="plan-price">€0<span>/Monat</span></div>
-          <ul class="feature-list">
-            <li><span class="check">✓</span> 5 Downloads pro Monat</li>
-            <li><span class="check">✓</span> Standard-Auflösung (2048px)</li>
-            <li><span class="check">✓</span> Royalty-Free Lizenz</li>
-            <li><span class="check">✓</span> Grundlegende Suchfilter</li>
-            <li><span class="cross">✕</span> Keine API-Zugriff</li>
-            <li><span class="cross">✕</span> Keine Prioritätsunterstützung</li>
-            <li><span class="cross">✕</span> Keine Markenlizenz</li>
-          </ul>
-          <a href="auth.html?mode=signup" class="btn btn-ghost" style="width:100%;">Kostenlos starten</a>
-        </div>
+      <!-- Score Info -->
+      <div class="score-info">
+        <h3>Wie wird der Qualitätsscore berechnet?</h3>
+        <p>Jedes Bild durchläuft eine strenge mehrstufige Qualitätsprüfung. Der finale Score (1–100) setzt sich aus verschiedenen Faktoren zusammen und bestimmt den Preis des Bildes.</p>
 
-        <!-- Pro -->
-        <div class="pricing-card popular">
-          <div class="popular-badge">Beliebt</div>
-          <div class="plan-name">Pro</div>
-          <div class="plan-desc">Für Freelancer und Agenturen</div>
-          <div class="plan-price">€29<span>/Monat</span></div>
-          <ul class="feature-list">
-            <li><span class="check">✓</span> Unbegrenzte Downloads</li>
-            <li><span class="check">✓</span> 4K-Auflösung (4096px)</li>
-            <li><span class="check">✓</span> Erweiterte Royalty-Free Lizenz</li>
-            <li><span class="check">✓</span> Erweiterte Filter & Such-API</li>
-            <li><span class="check">✓</span> API-Zugriff (1000 Calls/Tag)</li>
-            <li><span class="check">✓</span> E-Mail-Support innerhalb 24h</li>
-            <li><span class="cross">✕</span> Keine Markenlizenz</li>
-          </ul>
-          <a href="auth.html?mode=signup" class="btn btn-primary" style="width:100%;">Jetzt upgraden</a>
-        </div>
-
-        <!-- Enterprise -->
-        <div class="pricing-card">
-          <div class="plan-name">Enterprise</div>
-          <div class="plan-desc">Für große Unternehmen und Publisher</div>
-          <div class="plan-price">€99<span>/Monat</span></div>
-          <ul class="feature-list">
-            <li><span class="check">✓</span> Unbegrenzte Downloads</li>
-            <li><span class="check">✓</span> 8K-Auflösung (8192px)</li>
-            <li><span class="check">✓</span> Erweiterte Markenlizenz</li>
-            <li><span class="check">✓</span> Erweiterte Filter & Such-API</li>
-            <li><span class="check">✓</span> API-Zugriff (unbegrenzt)</li>
-            <li><span class="check">✓</span> Prioritäts-Support (4h)</li>
-            <li><span class="check">✓</span> Dedizierter Account Manager</li>
-          </ul>
-          <a href="about.html#contact" class="btn btn-ghost" style="width:100%;">Kontaktieren Sie uns</a>
+        <div class="score-steps">
+          <div class="score-step">
+            <div class="score-step-num">1</div>
+            <div>
+              <h4>Midjourney Generierung</h4>
+              <p>KI-generiertes Bild mit optimierten Prompts und Parametern.</p>
+            </div>
+          </div>
+          <div class="score-step">
+            <div class="score-step-num">2</div>
+            <div>
+              <h4>Excire Analyse</h4>
+              <p>Automatische Bildanalyse: Komposition, Belichtung, Schärfe, Farben.</p>
+            </div>
+          </div>
+          <div class="score-step">
+            <div class="score-step-num">3</div>
+            <div>
+              <h4>Topaz AI Upscale</h4>
+              <p>Intelligente Auflösungsverbesserung und Rauschunterdrückung.</p>
+            </div>
+          </div>
+          <div class="score-step">
+            <div class="score-step-num">4</div>
+            <div>
+              <h4>ExifTool Metadaten</h4>
+              <p>Korrekte EXIF-Daten, Keywords und Beschreibungen hinzugefügt.</p>
+            </div>
+          </div>
+          <div class="score-step">
+            <div class="score-step-num">5</div>
+            <div>
+              <h4>Finale Bewertung</h4>
+              <p>Gewichtete Gesamtbewertung bestimmt Score und Preis.</p>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="section" style="background:var(--bg-dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <!-- Footer -->
+  <footer class="footer">
     <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">FAQ</span>
-        <h2 class="section-title">Häufig gestellte Fragen</h2>
-        <p class="section-desc">Alles, was Sie über unsere Preise und Lizenzen wissen müssen.</p>
-      </div>
-
-      <div class="faq-list fade-in">
-        <div class="faq-item">
-          <button class="faq-question">
-            Was bedeutet „Royalty-Free“?
-            <span class="icon">▼</span>
-          </button>
-          <div class="faq-answer">
-            Royalty-Free bedeutet, dass Sie das Bild nach dem Kauf beliebig oft nutzen dürfen — ohne zusätzliche Gebühren pro Verwendung. Sie zahlen einmalig und nutzen das Bild für unbegrenzte Projekte, solange die Nutzung innerhalb der Lizenzbedingungen liegt.
-          </div>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">📸</span>
+            <span>StockPhotoShop</span>
+          </a>
+          <p>Hochwertige KI-generierte Stock-Fotos für Kreative, Entwickler und Unternehmen.</p>
         </div>
-        <div class="faq-item">
-          <button class="faq-question">
-            Kann ich jederzeit kündigen?
-            <span class="icon">▼</span>
-          </button>
-          <div class="faq-answer">
-            Ja, absolut. Sie können Ihr Abonnement jederzeit in Ihrem Profil kündigen. Ihr Zugang bleibt bis zum Ende des aktuellen Abrechnungszeitraums aktiv. Danach wechseln Sie automatisch auf den kostenlosen Basic-Plan.
-          </div>
+        <div class="footer-col">
+          <h4>Produkt</h4>
+          <ul>
+            <li><a href="gallery.html">Galerie</a></li>
+            <li><a href="pricing.html">Preise</a></li>
+            <li><a href="#">Neuste Bilder</a></li>
+            <li><a href="#">Beliebt</a></li>
+          </ul>
         </div>
-        <div class="faq-item">
-          <button class="faq-question">
-            Sind die Bilder wirklich KI-generiert?
-            <span class="icon">▼</span>
-          </button>
-          <div class="faq-answer">
-            Ja, alle Bilder auf unserer Plattform werden mit modernsten KI-Modellen generiert. Jedes Bild wird vor der Veröffentlichung auf Qualität, Konsistenz und Lizenzfreiheit geprüft. Wir garantieren, dass keine urheberrechtlich geschützten Werke verletzt werden.
-          </div>
+        <div class="footer-col">
+          <h4>Unternehmen</h4>
+          <ul>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="about.html#kontakt">Kontakt</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Karriere</a></li>
+          </ul>
         </div>
-        <div class="faq-item">
-          <button class="faq-question">
-            Gibt es eine API für Entwickler?
-            <span class="icon">▼</span>
-          </button>
-          <div class="faq-answer">
-            Ja, unsere REST-API ermöglicht es Entwicklern, unsere Bildersuche direkt in ihre Anwendungen zu integrieren. Pro-Nutzer erhalten 1.000 Calls/Tag, Enterprise-Kunden unbegrenzten Zugriff. Dokumentation finden Sie im Entwickler-Dashboard.
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">
-            Welche Zahlungsmethoden werden akzeptiert?
-            <span class="icon">▼</span>
-          </button>
-          <div class="faq-answer">
-            Wir akzeptieren Kreditkarte (Visa, Mastercard, American Express), PayPal, SEPA-Lastschrift und Apple Pay. Alle Zahlungen werden über verschlüsselte SSL-Verbindungen abgewickelt.
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">
-            Kann ich Bilder nach dem Kündigen weiter nutzen?
-            <span class="icon">▼</span>
-          </button>
-          <div class="faq-answer">
-            Ja. Bilder, die Sie während eines aktiven Abonnements heruntergeladen haben, dürfen Sie auch nach Kündigung weiter nutzen — solange es sich um dieselben Projekte handelt. Eine erneute Nutzung für neue Projekte erfordert einen erneuten Download.
-          </div>
+        <div class="footer-col">
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="#">AGB</a></li>
+            <li><a href="#">Datenschutz</a></li>
+            <li><a href="#">Impressum</a></li>
+            <li><a href="#">Lizenz</a></li>
+          </ul>
         </div>
       </div>
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="logo" style="font-size:1.1rem;">
-          <div class="logo-icon" style="width:28px;height:28px;font-size:0.8rem;">AI</div>
-          <span>Stock Photos</span>
-        </a>
-        <p class="footer-desc">Die führende Plattform für KI-generierte Stockfotos. Hochqualitativ, lizenzfrei und sofort einsatzbereit.</p>
-        <div class="footer-socials">
-          <a href="#" aria-label="Twitter">𝕏</a>
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="LinkedIn">💼</a>
-          <a href="#" aria-label="YouTube">▶</a>
-        </div>
+      <div class="footer-bottom">
+        <p>© 2026 StockPhotoShop. Alle Rechte vorbehalten.</p>
+        <p>Made with AI</p>
       </div>
-      <div class="footer-links">
-        <h4>Plattform</h4>
-        <a href="gallery.html">Galerie</a>
-        <a href="pricing.html">Preise</a>
-        <a href="about.html">Über uns</a>
-      </div>
-      <div class="footer-links">
-        <h4>Rechtliches</h4>
-        <a href="#">Nutzungsbedingungen</a>
-        <a href="#">Datenschutz</a>
-        <a href="#">Lizenzierung</a>
-      </div>
-      <div class="footer-links">
-        <h4>Newsletter</h4>
-        <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Die besten neuen Bilder direkt in Ihr Postfach.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault();">
-          <input type="email" placeholder="Ihre E-Mail" required aria-label="E-Mail">
-          <button type="submit">→</button>
-        </form>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 AI Stock Photos. Alle Rechte vorbehalten.</span>
-      <span>Made with 🤖 in Berlin</span>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

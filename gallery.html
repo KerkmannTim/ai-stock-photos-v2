@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galerie — AI Stock Photos</title>
-  <meta name="description" content="Durchsuchen Sie unsere Galerie mit über 100.000 KI-generierten Stockfotos. Filtern Sie nach Kategorie, Preis und Qualität.">
+  <title>Galerie — StockPhotoShop</title>
+  <meta name="description" content="Durchstöbere über 50.000 KI-generierte Stock-Fotos. Filtere nach Kategorie, Preis und Qualitätsscore.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,148 +12,379 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="nav-container">
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Hauptnavigation">
+    <div class="container navbar-inner">
       <a href="index.html" class="logo">
-        <div class="logo-icon">AI</div>
-        <span>Stock Photos</span>
+        <span class="logo-icon">📸</span>
+        <span>StockPhotoShop</span>
       </a>
-      <nav class="nav-links">
-        <a href="gallery.html" class="active">Galerie</a>
-        <a href="pricing.html">Preise</a>
-        <a href="about.html">Über uns</a>
-      </nav>
-      <div class="header-search">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Suchen..." aria-label="Suche">
-      </div>
-      <div class="header-actions">
-        <a href="auth.html" class="btn btn-ghost btn-sm" id="auth-btn">Anmelden</a>
-        <div class="user-menu hidden" id="user-menu" style="display:none;">
-          <div class="avatar-placeholder">U</div>
-          <img class="avatar-img hidden" alt="Profil" style="display:none;">
-          <span class="user-name">User</span>
-        </div>
-      </div>
-      <div class="menu-toggle" aria-label="Menü öffnen" role="button" tabindex="0">
-        <span></span><span></span><span></span>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html" class="active">Galerie</a></li>
+        <li><a href="pricing.html">Preise</a></li>
+        <li><a href="about.html">Über uns</a></li>
+        <li><a href="profile.html">Login</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <div class="mobile-nav">
-    <a href="index.html">Startseite</a>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" aria-hidden="true">
+    <a href="index.html">Home</a>
     <a href="gallery.html" class="active">Galerie</a>
     <a href="pricing.html">Preise</a>
     <a href="about.html">Über uns</a>
-    <a href="auth.html" id="mobile-auth-link">Anmelden</a>
+    <a href="profile.html">Login</a>
   </div>
 
-  <section class="section" style="padding-top:32px;">
+  <!-- Page Header -->
+  <header class="page-header">
     <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Galerie</span>
-        <h2 class="section-title">Alle KI-Stockfotos</h2>
-        <p class="section-desc">Durchsuchen Sie unsere vollständige Sammlung. Filtern, sortieren und finden Sie das perfekte Bild.</p>
-      </div>
+      <h1>Bildergalerie</h1>
+      <p>Entdecke über 50.000 hochwertige KI-generierte Bilder. Filtere nach Kategorie und finde das perfekte Foto.</p>
+    </div>
+  </header>
 
-      <div class="toolbar fade-in">
-        <div class="toolbar-group" style="flex:1;min-width:200px;">
-          <span class="search-icon" style="position:static;color:var(--text-muted);">🔍</span>
-          <input type="text" id="gallery-search" placeholder="Nach Titel oder Kategorie suchen..." style="flex:1;min-width:180px;padding:8px 12px;background:var(--bg-dark);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;">
+  <!-- Gallery Section -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <!-- Toolbar -->
+      <div class="gallery-toolbar">
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="all">Alle</button>
+          <button class="filter-btn" data-filter="natur">Natur</button>
+          <button class="filter-btn" data-filter="architektur">Architektur</button>
+          <button class="filter-btn" data-filter="business">Business</button>
+          <button class="filter-btn" data-filter="technologie">Technologie</button>
+          <button class="filter-btn" data-filter="kreativ">Kreativ</button>
+          <button class="filter-btn" data-filter="menschen">Menschen</button>
         </div>
-        <div class="toolbar-group">
-          <label>Kategorie</label>
-          <select id="filter-category">
-            <option value="all">Alle</option>
-            <option value="Natur">Natur</option>
-            <option value="Architektur">Architektur</option>
-            <option value="Business">Business</option>
-            <option value="Technologie">Technologie</option>
-            <option value="Kreativ">Kreativ</option>
-            <option value="Menschen">Menschen</option>
-            <option value="Essen">Essen</option>
-            <option value="Reisen">Reisen</option>
-          </select>
-        </div>
-        <div class="toolbar-group">
-          <label>Preis</label>
-          <select id="filter-price">
-            <option value="all">Alle</option>
-            <option value="free">Gratis</option>
-            <option value="under10">< €10</option>
-            <option value="10to20">€10 – €20</option>
-            <option value="over20">> €20</option>
-          </select>
-        </div>
-        <div class="toolbar-group">
-          <label>Sortierung</label>
-          <select id="filter-sort">
-            <option value="newest">Neueste</option>
-            <option value="popular">Beliebteste</option>
-            <option value="price-asc">Preis ↑</option>
-            <option value="price-desc">Preis ↓</option>
+        <div class="gallery-sort">
+          <select aria-label="Sortieren">
+            <option value="newest">Neueste zuerst</option>
+            <option value="score">Höchster Score</option>
+            <option value="price-low">Preis: Niedrig → Hoch</option>
+            <option value="price-high">Preis: Hoch → Niedrig</option>
           </select>
         </div>
       </div>
 
-      <div class="masonry-grid" id="gallery-grid">
-        <!-- JS populated -->
+      <!-- Gallery Grid -->
+      <div class="gallery-grid">
+
+        <!-- Item 1: Natur -->
+        <div class="gallery-item" data-category="natur">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&h=600&fit=crop" alt="Morgennebel über Bergen" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Morgennebel über Bergen</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.79</span>
+              <span class="gallery-item-score">⭐ 87</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2: Architektur -->
+        <div class="gallery-item" data-category="architektur">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop" alt="Moderne Glasfassade" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Moderne Glasfassade</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.99</span>
+              <span class="gallery-item-score">⭐ 93</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Business -->
+        <div class="gallery-item" data-category="business">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop" alt="Business Meeting" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Business Meeting im Büro</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.59</span>
+              <span class="gallery-item-score">⭐ 72</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4: Technologie -->
+        <div class="gallery-item" data-category="technologie">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop" alt="Circuit Board" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Abstrakte Schaltkreise</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.99</span>
+              <span class="gallery-item-score">⭐ 95</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5: Kreativ -->
+        <div class="gallery-item" data-category="kreativ">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&h=600&fit=crop" alt="Bunte Farben" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Abstrakte Farbwolke</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.39</span>
+              <span class="gallery-item-score low">⭐ 48</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6: Menschen -->
+        <div class="gallery-item" data-category="menschen">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="Teamarbeit" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Kreatives Team am Arbeiten</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.59</span>
+              <span class="gallery-item-score">⭐ 68</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 7: Natur -->
+        <div class="gallery-item" data-category="natur">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop" alt="Wald im Sonnenlicht" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Wald im goldenen Licht</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.99</span>
+              <span class="gallery-item-score">⭐ 91</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 8: Architektur -->
+        <div class="gallery-item" data-category="architektur">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=800&h=600&fit=crop" alt="Stadtsilhouette" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Stadtsilhouette bei Nacht</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.79</span>
+              <span class="gallery-item-score">⭐ 84</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 9: Business -->
+        <div class="gallery-item" data-category="business">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Diagramme und Daten" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Datenvisualisierung Business</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.59</span>
+              <span class="gallery-item-score">⭐ 65</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 10: Technologie -->
+        <div class="gallery-item" data-category="technologie">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop" alt="Cyberpunk Stadt" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Cyberpunk Stadt bei Nacht</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€1.99</span>
+              <span class="gallery-item-score">⭐ 98</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 11: Kreativ -->
+        <div class="gallery-item" data-category="kreativ">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&h=600&fit=crop" alt="Neon Kunst" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Neon Kunstinstallation</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.79</span>
+              <span class="gallery-item-score">⭐ 89</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 12: Menschen -->
+        <div class="gallery-item" data-category="menschen">
+          <div class="gallery-item-image">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop" alt="Lernende Studenten" loading="lazy">
+            <div class="gallery-item-overlay">
+              <button title="Vergrößern">🔍</button>
+              <button title="Zur Favoriten">🤍</button>
+            </div>
+          </div>
+          <div class="gallery-item-info">
+            <h4>Studenten beim Lernen</h4>
+            <div class="gallery-item-meta">
+              <span class="gallery-item-price">€0.39</span>
+              <span class="gallery-item-score low">⭐ 42</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="load-more-wrap">
-        <button class="btn btn-ghost" id="load-more">Mehr laden</button>
-      </div>
     </div>
   </section>
 
-  <!-- Image Modal Container -->
-  <div id="image-modal" class="image-modal"></div>
-
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="logo" style="font-size:1.1rem;">
-          <div class="logo-icon" style="width:28px;height:28px;font-size:0.8rem;">AI</div>
-          <span>Stock Photos</span>
-        </a>
-        <p class="footer-desc">Die führende Plattform für KI-generierte Stockfotos. Hochqualitativ, lizenzfrei und sofort einsatzbereit.</p>
-        <div class="footer-socials">
-          <a href="#" aria-label="Twitter">𝕏</a>
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="LinkedIn">💼</a>
-          <a href="#" aria-label="YouTube">▶</a>
+  <!-- Image Modal -->
+  <div class="modal-overlay image-modal" role="dialog" aria-modal="true" aria-label="Bildvorschau">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Schließen">✕</button>
+      <div class="modal-image">
+        <img src="" alt="">
+      </div>
+      <div class="modal-sidebar">
+        <h3 class="modal-title">Bildtitel</h3>
+        <div class="modal-meta">
+          <div class="modal-meta-item">
+            <span>Kategorie</span>
+            <span class="modal-category">—</span>
+          </div>
+          <div class="modal-meta-item">
+            <span>Score</span>
+            <span class="modal-score">—</span>
+          </div>
+          <div class="modal-meta-item">
+            <span>Auflösung</span>
+            <span class="modal-resolution">3840 × 2160</span>
+          </div>
+          <div class="modal-meta-item">
+            <span>Format</span>
+            <span class="modal-format">JPEG, RGB</span>
+          </div>
+        </div>
+        <div class="modal-price">€0.00</div>
+        <div class="modal-actions">
+          <button class="btn btn-primary btn-lg" style="width: 100%;">Jetzt kaufen</button>
+          <button class="btn btn-secondary btn-lg modal-favorite" style="width: 100%;">
+            <span class="fav-icon">🤍</span> Zur Favoritenliste
+          </button>
         </div>
       </div>
-      <div class="footer-links">
-        <h4>Plattform</h4>
-        <a href="gallery.html">Galerie</a>
-        <a href="pricing.html">Preise</a>
-        <a href="about.html">Über uns</a>
-      </div>
-      <div class="footer-links">
-        <h4>Rechtliches</h4>
-        <a href="#">Nutzungsbedingungen</a>
-        <a href="#">Datenschutz</a>
-        <a href="#">Lizenzierung</a>
-      </div>
-      <div class="footer-links">
-        <h4>Newsletter</h4>
-        <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Die besten neuen Bilder direkt in Ihr Postfach.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault();">
-          <input type="email" placeholder="Ihre E-Mail" required aria-label="E-Mail">
-          <button type="submit">→</button>
-        </form>
-      </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 AI Stock Photos. Alle Rechte vorbehalten.</span>
-      <span>Made with 🤖 in Berlin</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">📸</span>
+            <span>StockPhotoShop</span>
+          </a>
+          <p>Hochwertige KI-generierte Stock-Fotos für Kreative, Entwickler und Unternehmen.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Produkt</h4>
+          <ul>
+            <li><a href="gallery.html">Galerie</a></li>
+            <li><a href="pricing.html">Preise</a></li>
+            <li><a href="#">Neuste Bilder</a></li>
+            <li><a href="#">Beliebt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Unternehmen</h4>
+          <ul>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="about.html#kontakt">Kontakt</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Karriere</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="#">AGB</a></li>
+            <li><a href="#">Datenschutz</a></li>
+            <li><a href="#">Impressum</a></li>
+            <li><a href="#">Lizenz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 StockPhotoShop. Alle Rechte vorbehalten.</p>
+        <p>Made with AI</p>
+      </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Stock Photos — KI-generierte Stockfotos in Premium-Qualität</title>
-  <meta name="description" content="Entdecken Sie über 100.000 KI-generierte Stockfotos in höchster Qualität. Lizenzfrei, sofort verfügbar und unglaublich realistisch.">
+  <title>StockPhotoShop — KI-generierte Stock-Fotos</title>
+  <meta name="description" content="Hochwertige KI-generierte Stock-Fotos. 50.000+ Bilder mit Qualitätsscore. Ab €0,39 pro Bild.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,190 +12,188 @@
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="nav-container">
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Hauptnavigation">
+    <div class="container navbar-inner">
       <a href="index.html" class="logo">
-        <div class="logo-icon">AI</div>
-        <span>Stock Photos</span>
+        <span class="logo-icon">📸</span>
+        <span>StockPhotoShop</span>
       </a>
-      <nav class="nav-links">
-        <a href="gallery.html">Galerie</a>
-        <a href="pricing.html">Preise</a>
-        <a href="about.html">Über uns</a>
-      </nav>
-      <div class="header-search">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Suchen Sie nach Themen, Stilen oder Farben..." aria-label="Suche">
-      </div>
-      <div class="header-actions">
-        <a href="auth.html" class="btn btn-ghost btn-sm" id="auth-btn">Anmelden</a>
-        <div class="user-menu hidden" id="user-menu" style="display:none;">
-          <div class="avatar-placeholder">U</div>
-          <img class="avatar-img hidden" alt="Profil" style="display:none;">
-          <span class="user-name">User</span>
-        </div>
-      </div>
-      <div class="menu-toggle" aria-label="Menü öffnen" role="button" tabindex="0">
-        <span></span><span></span><span></span>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="gallery.html">Galerie</a></li>
+        <li><a href="pricing.html">Preise</a></li>
+        <li><a href="about.html">Über uns</a></li>
+        <li><a href="profile.html">Login</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <div class="mobile-nav">
-    <a href="index.html" class="active">Startseite</a>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" aria-hidden="true">
+    <a href="index.html" class="active">Home</a>
     <a href="gallery.html">Galerie</a>
     <a href="pricing.html">Preise</a>
     <a href="about.html">Über uns</a>
-    <a href="auth.html" id="mobile-auth-link">Anmelden</a>
+    <a href="profile.html">Login</a>
   </div>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-bg"></div>
     <div class="hero-grid"></div>
+    <div class="hero-bg"></div>
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
-        Über 100.000 KI-generierte Fotos verfügbar
+        100% KI-generierte Bilder
       </div>
-      <h1 class="hero-title">
-        Stockfotos der<br><span class="gradient-text">nächsten Generation</span>
+      <h1>
+        Hochwertige<br>
+        <span>Stock-Fotos</span> für<br>
+        jedes Projekt
       </h1>
-      <p class="hero-subtitle">
-        Lizenzfreie, KI-generierte Bilder in Kinoqualität — von Natur über Business bis zu abstrakter Kunst.
-        Ohne Abo. Ohne Kompromisse.
-      </p>
-      <div class="hero-search">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Suchen Sie nach 'Berge', 'Business', 'Abstract'..." aria-label="Suche">
-        <button class="search-btn" onclick="window.location.href='gallery.html'">Suchen</button>
+      <p>Über 50.000 KI-generierte Bilder mit Qualitätsscore. Lizenzfrei, sofort verfügbar — ab €0,39 pro Bild.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Suche nach Natur, Business, Technologie..." aria-label="Suche">
+        <button type="button">Suchen</button>
       </div>
-      <div class="hero-tags">
-        <span>Beliebt:</span>
-        <a href="gallery.html?category=Natur">Natur</a>
-        <a href="gallery.html?category=Business">Business</a>
-        <a href="gallery.html?category=Technologie">Technologie</a>
-        <a href="gallery.html?category=Kreativ">Kreativ</a>
-        <a href="gallery.html?category=Reisen">Reisen</a>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-value">50.000+</div>
+          <div class="stat-label">Bilder</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">1-100</div>
+          <div class="stat-label">Qualitätsscore</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">€0.39</div>
+          <div class="stat-label">Ab-Preis</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">KI-generiert</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Categories -->
+  <!-- Categories Section -->
   <section class="section">
     <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Kategorien</span>
-        <h2 class="section-title">Entdecken Sie unsere Sammlungen</h2>
-        <p class="section-desc">Von atemberaubender Natur bis zu modernem Business — finden Sie genau das Bild, das Ihr Projekt braucht.</p>
+      <div class="section-header">
+        <h2>Entdecke Kategorien</h2>
+        <p>Stöbere durch unsere beliebtesten Bildkategorien und finde das perfekte Foto für dein Projekt.</p>
       </div>
-      <div class="categories-grid" id="categories-grid">
-        <!-- JS populated -->
+      <div class="categories-grid">
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&h=400&fit=crop" alt="Natur" loading="lazy">
+          <div class="category-card-content">
+            <h3>Natur</h3>
+            <span>8.500+ Bilder</span>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop" alt="Architektur" loading="lazy">
+          <div class="category-card-content">
+            <h3>Architektur</h3>
+            <span>6.200+ Bilder</span>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop" alt="Business" loading="lazy">
+          <div class="category-card-content">
+            <h3>Business</h3>
+            <span>12.000+ Bilder</span>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop" alt="Technologie" loading="lazy">
+          <div class="category-card-content">
+            <h3>Technologie</h3>
+            <span>9.800+ Bilder</span>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=400&fit=crop" alt="Kreativ" loading="lazy">
+          <div class="category-card-content">
+            <h3>Kreativ</h3>
+            <span>7.300+ Bilder</span>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Menschen" loading="lazy">
+          <div class="category-card-content">
+            <h3>Menschen</h3>
+            <span>10.500+ Bilder</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Featured Images -->
-  <section class="section" style="background:var(--bg-dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Highlights</span>
-        <h2 class="section-title">Ausgewählte Bilder</h2>
-        <p class="section-desc">Unsere Kuratoren wählen täglich die besten KI-generierten Fotos für Sie aus.</p>
-      </div>
-      <div class="image-grid" id="featured-grid">
-        <!-- JS populated -->
-      </div>
-      <div class="text-center mt-4">
-        <a href="gallery.html" class="btn btn-primary btn-lg">Alle Bilder ansehen →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats -->
-  <section class="section stats-section">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number" data-target="100000" data-suffix="+">0</div>
-          <div class="stat-label">KI-Fotos verfügbar</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="8" data-suffix="">0</div>
-          <div class="stat-label">Kategorien</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="50" data-suffix="K+">0</div>
-          <div class="stat-label">Aktive Nutzer</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-target="99" data-suffix="%">0</div>
-          <div class="stat-label">Zufriedenheitsrate</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section" style="text-align:center;">
-    <div class="container">
-      <div class="fade-in">
-        <span class="section-label">Loslegen</span>
-        <h2 class="section-title" style="margin-bottom:16px;">Bereit für die Zukunft der Stockfotografie?</h2>
-        <p class="section-desc" style="margin-bottom:32px;">Registrieren Sie sich kostenlos und erhalten Sie 5 Gratis-Downloads zum Start.</p>
-        <a href="auth.html?mode=signup" class="btn btn-primary btn-lg">Kostenlos registrieren</a>
-      </div>
+  <!-- CTA Section -->
+  <section class="section" style="background: linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.03) 50%, transparent 100%);">
+    <div class="container" style="text-align: center;">
+      <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 16px;">Bereit loszulegen?</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto;">Durchstöbere unsere Galerie und finde das perfekte Bild für dein nächstes Projekt.</p>
+      <a href="gallery.html" class="btn btn-primary btn-lg">Zur Galerie</a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="logo" style="font-size:1.1rem;">
-          <div class="logo-icon" style="width:28px;height:28px;font-size:0.8rem;">AI</div>
-          <span>Stock Photos</span>
-        </a>
-        <p class="footer-desc">Die führende Plattform für KI-generierte Stockfotos. Hochqualitativ, lizenzfrei und sofort einsatzbereit für Ihre kreativen Projekte.</p>
-        <div class="footer-socials">
-          <a href="#" aria-label="Twitter">𝕏</a>
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="LinkedIn">💼</a>
-          <a href="#" aria-label="YouTube">▶</a>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">📸</span>
+            <span>StockPhotoShop</span>
+          </a>
+          <p>Hochwertige KI-generierte Stock-Fotos für Kreative, Entwickler und Unternehmen. Lizenzfrei, sofort verfügbar.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Produkt</h4>
+          <ul>
+            <li><a href="gallery.html">Galerie</a></li>
+            <li><a href="pricing.html">Preise</a></li>
+            <li><a href="#">Neuste Bilder</a></li>
+            <li><a href="#">Beliebt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Unternehmen</h4>
+          <ul>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="about.html#kontakt">Kontakt</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Karriere</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="#">AGB</a></li>
+            <li><a href="#">Datenschutz</a></li>
+            <li><a href="#">Impressum</a></li>
+            <li><a href="#">Lizenz</a></li>
+          </ul>
         </div>
       </div>
-      <div class="footer-links">
-        <h4>Plattform</h4>
-        <a href="gallery.html">Galerie</a>
-        <a href="pricing.html">Preise</a>
-        <a href="about.html">Über uns</a>
-        <a href="auth.html">Anmelden</a>
+      <div class="footer-bottom">
+        <p>© 2026 StockPhotoShop. Alle Rechte vorbehalten.</p>
+        <p>Made with AI</p>
       </div>
-      <div class="footer-links">
-        <h4>Rechtliches</h4>
-        <a href="#">Nutzungsbedingungen</a>
-        <a href="#">Datenschutz</a>
-        <a href="#">Lizenzierung</a>
-        <a href="#">Impressum</a>
-      </div>
-      <div class="footer-links">
-        <h4>Newsletter</h4>
-        <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Die besten neuen Bilder direkt in Ihr Postfach.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault();">
-          <input type="email" placeholder="Ihre E-Mail" required aria-label="E-Mail für Newsletter">
-          <button type="submit">→</button>
-        </form>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 AI Stock Photos. Alle Rechte vorbehalten.</span>
-      <span>Made with 🤖 in Berlin</span>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -3,219 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil — AI Stock Photos</title>
-  <meta name="description" content="Ihr persönliches Profil bei AI Stock Photos. Downloads, Favoriten und Kontoeinstellungen.">
+  <title>Profil — StockPhotoShop</title>
+  <meta name="description" content="Dein Benutzerprofil, Downloads, Favoriten und Einstellungen.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .profile-guard { display:none; }
-    .profile-guard.visible { display:block; }
-    .login-prompt { text-align:center; padding:120px 24px; max-width:500px; margin:0 auto; }
-    .login-prompt h2 { font-size:1.8rem; margin-bottom:12px; }
-    .login-prompt p { color:var(--text-secondary); margin-bottom:32px; }
-  </style>
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="nav-container">
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Hauptnavigation">
+    <div class="container navbar-inner">
       <a href="index.html" class="logo">
-        <div class="logo-icon">AI</div>
-        <span>Stock Photos</span>
+        <span class="logo-icon">📸</span>
+        <span>StockPhotoShop</span>
       </a>
-      <nav class="nav-links">
-        <a href="gallery.html">Galerie</a>
-        <a href="pricing.html">Preise</a>
-        <a href="about.html">Über uns</a>
-      </nav>
-      <div class="header-search">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Suchen..." aria-label="Suche">
-      </div>
-      <div class="header-actions">
-        <a href="auth.html" class="btn btn-ghost btn-sm" id="auth-btn">Anmelden</a>
-        <div class="user-menu hidden" id="user-menu" style="display:none;">
-          <div class="avatar-placeholder">U</div>
-          <img class="avatar-img hidden" alt="Profil" style="display:none;">
-          <span class="user-name">User</span>
-        </div>
-      </div>
-      <div class="menu-toggle" aria-label="Menü öffnen" role="button" tabindex="0">
-        <span></span><span></span><span></span>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Galerie</a></li>
+        <li><a href="pricing.html">Preise</a></li>
+        <li><a href="about.html">Über uns</a></li>
+        <li><a href="profile.html" class="active">Login</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <div class="mobile-nav">
-    <a href="index.html">Startseite</a>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" aria-hidden="true">
+    <a href="index.html">Home</a>
     <a href="gallery.html">Galerie</a>
     <a href="pricing.html">Preise</a>
     <a href="about.html">Über uns</a>
-    <a href="auth.html" id="mobile-auth-link">Anmelden</a>
+    <a href="profile.html" class="active">Login</a>
   </div>
 
-  <!-- Login prompt for guests -->
-  <div class="login-prompt" id="login-prompt">
-    <div style="font-size:3rem;margin-bottom:16px;">🔒</div>
-    <h2>Profil erforderlich</h2>
-    <p>Bitte melden Sie sich an, um Ihr Profil, Downloads und Favoriten zu sehen.</p>
-    <a href="auth.html" class="btn btn-primary btn-lg">Zum Login</a>
-  </div>
-
-  <!-- Authenticated content -->
-  <div class="profile-guard" id="profile-content" style="display:none;">
-    <div class="profile-layout">
-      <aside class="profile-sidebar">
-        <div class="profile-card">
-          <div class="profile-avatar" id="profile-avatar">U</div>
-          <div class="profile-name" id="profile-name">Nutzer</div>
-          <div class="profile-email" id="profile-email">nutzer@beispiel.de</div>
-          <span style="display:inline-block;padding:4px 12px;background:rgba(34,197,94,0.1);color:var(--success);border-radius:100px;font-size:0.75rem;font-weight:600;">Basic Plan</span>
-        </div>
-        <ul class="profile-nav">
-          <li class="active" data-section="downloads">
-            <span class="icon">📥</span> Meine Downloads
-          </li>
-          <li data-section="favorites">
-            <span class="icon">♥</span> Meine Favoriten
-          </li>
-          <li data-section="settings">
-            <span class="icon">⚙</span> Einstellungen
-          </li>
-          <li data-action="logout">
-            <span class="icon">🚪</span> Abmelden
-          </li>
-        </ul>
-      </aside>
-
-      <main class="profile-main">
-        <!-- Downloads -->
-        <div class="profile-section active" id="section-downloads">
-          <h3>Meine Downloads</h3>
-          <div class="image-grid" id="downloads-grid">
-            <!-- JS populated -->
-          </div>
-        </div>
-
-        <!-- Favorites -->
-        <div class="profile-section" id="section-favorites">
-          <h3>Meine Favoriten</h3>
-          <div class="image-grid" id="favorites-grid">
-            <!-- JS populated -->
-          </div>
-        </div>
-
-        <!-- Settings -->
-        <div class="profile-section" id="section-settings">
-          <h3>Kontoeinstellungen</h3>
-          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;max-width:600px;">
-            <div class="form-group">
-              <label>Anzeigename</label>
-              <input type="text" id="setting-name" value="Nutzer">
-            </div>
-            <div class="form-group">
-              <label>E-Mail-Adresse</label>
-              <input type="email" id="setting-email" value="nutzer@beispiel.de" disabled>
-            </div>
-            <div class="form-group">
-              <label>Passwort ändern</label>
-              <input type="password" placeholder="Neues Passwort">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Passwort wiederholen">
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
-              <input type="checkbox" id="newsletter" checked style="width:18px;height:18px;accent-color:var(--accent);">
-              <label for="newsletter" style="margin:0;font-size:0.9rem;color:var(--text-secondary);">Newsletter abonnieren</label>
-            </div>
-            <button class="btn btn-primary">Änderungen speichern</button>
-          </div>
-
-          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;max-width:600px;margin-top:24px;">
-            <h4 style="margin-bottom:16px;color:var(--error);">⚠ Gefahrenzone</h4>
-            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">Das Löschen Ihres Kontos kann nicht rückgängig gemacht werden. Alle Daten gehen verloren.</p>
-            <button class="btn btn-ghost" style="color:var(--error);border-color:var(--error);">Konto löschen</button>
-          </div>
-        </div>
-      </main>
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1>Dein Profil</h1>
+      <p>Verwalte deine Downloads, Favoriten und Kontoeinstellungen.</p>
     </div>
-  </div>
+  </header>
 
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="logo" style="font-size:1.1rem;">
-          <div class="logo-icon" style="width:28px;height:28px;font-size:0.8rem;">AI</div>
-          <span>Stock Photos</span>
-        </a>
-        <p class="footer-desc">Die führende Plattform für KI-generierte Stockfotos. Hochqualitativ, lizenzfrei und sofort einsatzbereit.</p>
-        <div class="footer-socials">
-          <a href="#" aria-label="Twitter">𝕏</a>
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="LinkedIn">💼</a>
-          <a href="#" aria-label="YouTube">▶</a>
+  <!-- Profile Section -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="profile-avatar">JD</div>
+        <div class="profile-info">
+          <h2>John Doe</h2>
+          <p>john.doe@example.com</p>
         </div>
       </div>
-      <div class="footer-links">
-        <h4>Plattform</h4>
-        <a href="gallery.html">Galerie</a>
-        <a href="pricing.html">Preise</a>
-        <a href="about.html">Über uns</a>
+
+      <!-- Tabs -->
+      <div class="profile-tabs">
+        <button class="profile-tab active" data-tab="downloads">Meine Downloads</button>
+        <button class="profile-tab" data-tab="favorites">Meine Favoriten</button>
+        <button class="profile-tab" data-tab="settings">Einstellungen</button>
       </div>
-      <div class="footer-links">
-        <h4>Rechtliches</h4>
-        <a href="#">Nutzungsbedingungen</a>
-        <a href="#">Datenschutz</a>
-        <a href="#">Lizenzierung</a>
+
+      <!-- Downloads Tab -->
+      <div class="profile-section active" id="downloads">
+        <div class="empty-state">
+          <div class="empty-state-icon">📥</div>
+          <h3>Noch keine Downloads</h3>
+          <p>Du hast noch keine Bilder heruntergeladen. Durchstöbere die Galerie und finde das perfekte Bild.</p>
+          <a href="gallery.html" class="btn btn-primary" style="margin-top: 20px;">Zur Galerie</a>
+        </div>
       </div>
-      <div class="footer-links">
-        <h4>Newsletter</h4>
-        <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Die besten neuen Bilder direkt in Ihr Postfach.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault();">
-          <input type="email" placeholder="Ihre E-Mail" required aria-label="E-Mail">
-          <button type="submit">→</button>
-        </form>
+
+      <!-- Favorites Tab -->
+      <div class="profile-section" id="favorites">
+        <div class="empty-state">
+          <div class="empty-state-icon">❤️</div>
+          <h3>Noch keine Favoriten</h3>
+          <p>Markiere Bilder als Favoriten, um sie hier schnell wiederzufinden.</p>
+          <a href="gallery.html" class="btn btn-primary" style="margin-top: 20px;">Bilder entdecken</a>
+        </div>
       </div>
+
+      <!-- Settings Tab -->
+      <div class="profile-section" id="settings">
+
+        <div class="settings-group">
+          <h3>Kontoinformationen</h3>
+          <div class="form-group">
+            <label for="profile-name">Anzeigename</label>
+            <input type="text" id="profile-name" value="John Doe">
+          </div>
+          <div class="form-group">
+            <label for="profile-email">E-Mail-Adresse</label>
+            <input type="email" id="profile-email" value="john.doe@example.com">
+          </div>
+          <div class="form-group">
+            <label for="profile-bio">Bio</label>
+            <textarea id="profile-bio" placeholder="Erzähle etwas über dich..."></textarea>
+          </div>
+          <button class="btn btn-primary btn-sm">Speichern</button>
+        </div>
+
+        <div class="settings-group">
+          <h3>Benachrichtigungen</h3>
+          <div class="toggle-row">
+            <div>
+              <label>Neue Bilder</label>
+              <p>Benachrichtigung wenn neue Bilder in deinen Lieblingskategorien verfügbar sind</p>
+            </div>
+            <div class="toggle-switch active"></div>
+          </div>
+          <div class="toggle-row">
+            <div>
+              <label>Preisänderungen</label>
+              <p>Benachrichtigung bei Änderungen des Preismodells</p>
+            </div>
+            <div class="toggle-switch"></div>
+          </div>
+          <div class="toggle-row">
+            <div>
+              <label>Newsletter</label>
+              <p>Wöchentlicher Newsletter mit neuen Highlights</p>
+            </div>
+            <div class="toggle-switch active"></div>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <h3>Datenschutz</h3>
+          <div class="toggle-row">
+            <div>
+              <label>Öffentliches Profil</label>
+              <p>Andere Nutzer können dein Profil und deine Sammlungen sehen</p>
+            </div>
+            <div class="toggle-switch"></div>
+          </div>
+          <div class="toggle-row">
+            <div>
+              <label>Download-Historie</label>
+              <p>Speichere meine Download-Historie für Empfehlungen</p>
+            </div>
+            <div class="toggle-switch active"></div>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <h3>Konto</h3>
+          <div class="toggle-row">
+            <div>
+              <label style="color: var(--danger);">Konto löschen</label>
+              <p>Dies löscht dein Konto und alle zugehörigen Daten unwiderruflich</p>
+            </div>
+            <button class="btn btn-ghost btn-sm" style="color: var(--danger); border-color: var(--danger);">Löschen</button>
+          </div>
+        </div>
+
+      </div>
+
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 AI Stock Photos. Alle Rechte vorbehalten.</span>
-      <span>Made with 🤖 in Berlin</span>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">📸</span>
+            <span>StockPhotoShop</span>
+          </a>
+          <p>Hochwertige KI-generierte Stock-Fotos für Kreative, Entwickler und Unternehmen.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Produkt</h4>
+          <ul>
+            <li><a href="gallery.html">Galerie</a></li>
+            <li><a href="pricing.html">Preise</a></li>
+            <li><a href="#">Neuste Bilder</a></li>
+            <li><a href="#">Beliebt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Unternehmen</h4>
+          <ul>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="about.html#kontakt">Kontakt</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Karriere</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="#">AGB</a></li>
+            <li><a href="#">Datenschutz</a></li>
+            <li><a href="#">Impressum</a></li>
+            <li><a href="#">Lizenz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 StockPhotoShop. Alle Rechte vorbehalten.</p>
+        <p>Made with AI</p>
+      </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
-  <script>
-    (function() {
-      // Guard: redirect if not logged in (with delay to allow auth init)
-      setTimeout(function() {
-        var user = window.Auth && window.Auth.getUser ? window.Auth.getUser() : null;
-        var prompt = document.getElementById('login-prompt');
-        var content = document.getElementById('profile-content');
-        if (!user) {
-          if (prompt) prompt.style.display = 'block';
-          if (content) content.style.display = 'none';
-        } else {
-          if (prompt) prompt.style.display = 'none';
-          if (content) { content.classList.add('visible'); content.style.display = 'block'; }
-          var name = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Nutzer';
-          var email = user.email || 'nutzer@beispiel.de';
-          var avatarEl = document.getElementById('profile-avatar');
-          var nameEl = document.getElementById('profile-name');
-          var emailEl = document.getElementById('profile-email');
-          if (avatarEl) avatarEl.textContent = name.charAt(0).toUpperCase();
-          if (nameEl) nameEl.textContent = name;
-          if (emailEl) emailEl.textContent = email;
-          var sName = document.getElementById('setting-name');
-          var sEmail = document.getElementById('setting-email');
-          if (sName) sName.value = name;
-          if (sEmail) sEmail.value = email;
-        }
-      }, 600);
-    })();
-  </script>
 </body>
 </html>
