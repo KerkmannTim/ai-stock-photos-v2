@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Über uns — AI Stock Photos</title>
+  <meta name="description" content="Lernen Sie AI Stock Photos kennen. Unsere Mission, unser Team und die Technologie hinter unseren KI-generierten Stockfotos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">AI</div>
+        <span>Stock Photos</span>
+      </a>
+      <nav class="nav-links">
+        <a href="gallery.html">Galerie</a>
+        <a href="pricing.html">Preise</a>
+        <a href="about.html" class="active">Über uns</a>
+      </nav>
+      <div class="header-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Suchen..." aria-label="Suche">
+      </div>
+      <div class="header-actions">
+        <a href="auth.html" class="btn btn-ghost btn-sm" id="auth-btn">Anmelden</a>
+        <div class="user-menu hidden" id="user-menu" style="display:none;">
+          <div class="avatar-placeholder">U</div>
+          <img class="avatar-img hidden" alt="Profil" style="display:none;">
+          <span class="user-name">User</span>
+        </div>
+      </div>
+      <div class="menu-toggle" aria-label="Menü öffnen" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav">
+    <a href="index.html">Startseite</a>
+    <a href="gallery.html">Galerie</a>
+    <a href="pricing.html">Preise</a>
+    <a href="about.html" class="active">Über uns</a>
+    <a href="auth.html" id="mobile-auth-link">Anmelden</a>
+  </div>
+
+  <!-- About Hero -->
+  <section class="about-hero">
+    <div class="about-content">
+      <span class="section-label">Über uns</span>
+      <h1 class="section-title" style="font-size:clamp(2rem,5vw,3rem);">Die Zukunft der Stockfotografie beginnt hier</h1>
+      <p>Wir sind ein Team aus KI-Forschern, Designern und Fotografen, das sich einer Mission verschrieben hat: die Art und Weise, wie die Welt Bilder findet und nutzt, grundlegend zu verändern. Gegründet 2024 in Berlin, bauen wir die führende Plattform für KI-generierte, lizenzfreie Stockfotos.</p>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Unsere Geschichte</span>
+        <h2 class="section-title">Von einer Idee zu 100.000 Bildern</h2>
+      </div>
+      <div style="max-width:800px;margin:0 auto;">
+        <p style="color:var(--text-secondary);font-size:1.05rem;line-height:1.8;margin-bottom:20px;">
+          Alles begann mit einer einfachen Frage: Was, wenn KI nicht nur existierende Bilder imitiert, sondern völlig neue, einzigartige visuelle Welten erschaffen könnte? Im Herbst 2024 versammelten sich drei Freunde in einem Coworking-Space in Berlin-Kreuzberg und beschlossen, genau das herauszufinden.
+        </p>
+        <p style="color:var(--text-secondary);font-size:1.05rem;line-height:1.8;margin-bottom:20px;">
+          Innerhalb von sechs Monaten entwickelten wir eine proprietäre Pipeline, die modernste Diffusions-Modelle mit eigenen Qualitäts- und Filtermechanismen kombiniert. Das Ergebnis: Bilder, die nicht nur technisch perfekt sind, sondern echte emotionale Tiefe und kreative Vision transportieren.
+        </p>
+        <p style="color:var(--text-secondary);font-size:1.05rem;line-height:1.8;">
+          Heute arbeiten wir mit Designern, Marketing-Agenturen und Publishern weltweit zusammen. Unsere Plattform wächst täglich um Hunderte neuer Bilder — jedes einzelne einzigartig, lizenzfrei und sofort einsatzbereit.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission / Vision -->
+  <section class="section" style="background:var(--bg-dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Mission & Vision</span>
+        <h2 class="section-title">Wofür wir stehen</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;max-width:900px;margin:0 auto;">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;">
+          <div style="width:48px;height:48px;border-radius:var(--radius-sm);background:rgba(59,130,246,0.1);display:grid;place-items:center;margin-bottom:16px;font-size:1.4rem;">🎯</div>
+          <h3 style="font-size:1.2rem;margin-bottom:10px;">Mission</h3>
+          <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.7;">Wir demokratisieren den Zugang zu hochwertigen, einzigartigen Bildern. Jeder Kreative verdient es, visuelle Inhalte in Kinoqualität zu nutzen — unabhängig von Budget oder Standort.</p>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;">
+          <div style="width:48px;height:48px;border-radius:var(--radius-sm);background:rgba(139,92,246,0.1);display:grid;place-items:center;margin-bottom:16px;font-size:1.4rem;">🔮</div>
+          <h3 style="font-size:1.2rem;margin-bottom:10px;">Vision</h3>
+          <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.7;">Bis 2028 wollen wir die größte KI-Stockfoto-Datenbank der Welt aufbauen und gleichzeitig die höchsten ethischen Standards setzen. Kreativität ohne Grenzen — aber mit Verantwortung.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Team</span>
+        <h2 class="section-title">Die Menschen hinter der KI</h2>
+        <p class="section-desc">Ein kleines, leidenschaftliches Team mit großer Vision.</p>
+      </div>
+      <div class="team-grid fade-in">
+        <div class="team-card">
+          <div class="avatar">S</div>
+          <div class="name">Sarah Weber</div>
+          <div class="role">CEO & Mitgründerin</div>
+        </div>
+        <div class="team-card">
+          <div class="avatar">M</div>
+          <div class="name">Marcus Lindner</div>
+          <div class="role">CTO & Mitgründer</div>
+        </div>
+        <div class="team-card">
+          <div class="avatar">A</div>
+          <div class="name">Anna Schmidt</div>
+          <div class="role">Head of Design</div>
+        </div>
+        <div class="team-card">
+          <div class="avatar">L</div>
+          <div class="name">Lukas Fischer</div>
+          <div class="role">KI-Forscher</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack -->
+  <section class="section" style="background:var(--bg-dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Technologie</span>
+        <h2 class="section-title">Unser Tech Stack</h2>
+        <p class="section-desc">Modernste Technologie für modernste Bilder.</p>
+      </div>
+      <div class="tech-stack fade-in">
+        <span class="tech-badge">PyTorch</span>
+        <span class="tech-badge">Stable Diffusion</span>
+        <span class="tech-badge">Flux</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">FastAPI</span>
+        <span class="tech-badge">PostgreSQL</span>
+        <span class="tech-badge">Redis</span>
+        <span class="tech-badge">Docker</span>
+        <span class="tech-badge">Kubernetes</span>
+        <span class="tech-badge">AWS</span>
+        <span class="tech-badge">Cloudflare CDN</span>
+        <span class="tech-badge">React</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Partner</span>
+        <h2 class="section-title">Vertrauenswürdige Partner</h2>
+        <p class="section-desc">Wir arbeiten mit führenden Plattformen und Unternehmen zusammen.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;opacity:0.6;">
+        <div style="padding:16px 32px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);font-weight:700;color:var(--text-secondary);">Adobe Stock</div>
+        <div style="padding:16px 32px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);font-weight:700;color:var(--text-secondary);">Shutterstock</div>
+        <div style="padding:16px 32px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);font-weight:700;color:var(--text-secondary);">Getty Images</div>
+        <div style="padding:16px 32px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);font-weight:700;color:var(--text-secondary);">Canva</div>
+        <div style="padding:16px 32px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);font-weight:700;color:var(--text-secondary);">Figma</div>
+        <div style="padding:16px 32px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);font-weight:700;color:var(--text-secondary);">Notion</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="font-size:1.1rem;">
+          <div class="logo-icon" style="width:28px;height:28px;font-size:0.8rem;">AI</div>
+          <span>Stock Photos</span>
+        </a>
+        <p class="footer-desc">Die führende Plattform für KI-generierte Stockfotos. Hochqualitativ, lizenzfrei und sofort einsatzbereit.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="LinkedIn">💼</a>
+          <a href="#" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Plattform</h4>
+        <a href="gallery.html">Galerie</a>
+        <a href="pricing.html">Preise</a>
+        <a href="about.html">Über uns</a>
+      </div>
+      <div class="footer-links">
+        <h4>Rechtliches</h4>
+        <a href="#">Nutzungsbedingungen</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">Lizenzierung</a>
+      </div>
+      <div class="footer-links">
+        <h4>Newsletter</h4>
+        <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Die besten neuen Bilder direkt in Ihr Postfach.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" placeholder="Ihre E-Mail" required aria-label="E-Mail">
+          <button type="submit">→</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AI Stock Photos. Alle Rechte vorbehalten.</span>
+      <span>Made with 🤖 in Berlin</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
