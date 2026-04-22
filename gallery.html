@@ -422,10 +422,17 @@
     // Test-Karte: 4242 4242 4242 4242, MM/YY: 12/25, CVC: 123
 
     document.querySelectorAll('.stripe-buy-btn').forEach(btn => {
-      btn.addEventListener('click', handleBuyClick);
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation(); // WICHTIG: Verhindert Öffnen des Bild-Modals
+        handleBuyClick(e);
+      });
     });
 
     function handleBuyClick(e) {
+      e.preventDefault();
+      e.stopPropagation(); // WICHTIG: Verhindert Öffnen des Bild-Modals
+      
       const btn = e.currentTarget;
       const price = parseInt(btn.dataset.price); // Preis in Cent
       const name = btn.dataset.name || 'Bild';
