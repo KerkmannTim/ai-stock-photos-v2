@@ -117,6 +117,9 @@
   // Gallery Filters
   // ============================================
   function initGalleryFilters() {
+    // Skip if this page uses dynamic API loading (handled by gallery.html inline script)
+    if (document.getElementById('gallery-container')) return;
+
     const filterButtons = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
 
@@ -171,11 +174,15 @@
     const modalResolution = modal.querySelector('.modal-resolution');
     const modalFormat = modal.querySelector('.modal-format');
 
-    // Open modal on gallery item click
-    document.querySelectorAll('.gallery-item').forEach(function (item) {
-      item.addEventListener('click', function (e) {
+    // Open modal on gallery item click (event delegation for dynamic items)
+    const galleryContainer = document.querySelector('.gallery-grid') || document.querySelector('#gallery-container');
+    if (galleryContainer) {
+      galleryContainer.addEventListener('click', function (e) {
+        const item = e.target.closest('.gallery-item');
+        if (!item) return;
         // Don't open if clicking action buttons
         if (e.target.closest('.gallery-item-overlay button')) return;
+        if (e.target.closest('.add-to-cart-btn')) return;
 
         const img = item.querySelector('img');
         const title = item.querySelector('h4').textContent;
@@ -192,10 +199,20 @@
         if (modalResolution) modalResolution.textContent = '3840 × 2160';
         if (modalFormat) modalFormat.textContent = 'JPEG, RGB';
 
+        // Update modal buy button data attributes
+        const cartBtn = item.querySelector('.add-to-cart-btn');
+        const buyBtn = document.getElementById('modal-buy-btn');
+        if (buyBtn && cartBtn) {
+          buyBtn.dataset.price = cartBtn.dataset.price;
+          buyBtn.dataset.name = cartBtn.dataset.name;
+          buyBtn.dataset.img = cartBtn.dataset.img;
+          buyBtn.dataset.score = cartBtn.dataset.score;
+        }
+
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
       });
-    });
+    }
 
     // Close modal
     function closeModal() {

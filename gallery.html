@@ -77,7 +77,7 @@
           <button class="filter-btn" data-filter="menschen">Menschen</button>
         </div>
         <div class="gallery-sort">
-          <select aria-label="Sortieren">
+          <select id="gallery-sort" aria-label="Sortieren">
             <option value="newest">Neueste zuerst</option>
             <option value="score">Höchster Score</option>
             <option value="price-low">Preis: Niedrig → Hoch</option>
@@ -87,236 +87,8 @@
       </div>
 
       <!-- Gallery Grid -->
-      <div class="gallery-grid">
-
-        <!-- Item 1: Natur -->
-        <div class="gallery-item" data-category="natur">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&h=600&fit=crop" alt="Morgennebel über Bergen" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Morgennebel über Bergen</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.89</span>
-              <span class="gallery-item-score">⭐ 87</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="89" data-name="Morgennebel über Bergen" data-img="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&h=600&fit=crop" data-score="87">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 2: Architektur -->
-        <div class="gallery-item" data-category="architektur">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop" alt="Moderne Glasfassade" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Moderne Glasfassade</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.99</span>
-              <span class="gallery-item-score">⭐ 93</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="99" data-name="Moderne Glasfassade" data-img="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop" data-score="93">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 3: Business -->
-        <div class="gallery-item" data-category="business">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop" alt="Business Meeting" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Business Meeting im Büro</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.79</span>
-              <span class="gallery-item-score">⭐ 72</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="79" data-name="Business Meeting im Büro" data-img="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop" data-score="72">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 4: Technologie -->
-        <div class="gallery-item" data-category="technologie">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop" alt="Circuit Board" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Abstrakte Schaltkreise</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.99</span>
-              <span class="gallery-item-score">⭐ 95</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="99" data-name="Abstrakte Schaltkreise" data-img="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop" data-score="95">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 5: Kreativ -->
-        <div class="gallery-item" data-category="kreativ">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&h=600&fit=crop" alt="Bunte Farben" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Abstrakte Farbwolke</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.49</span>
-              <span class="gallery-item-score low">⭐ 48</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="49" data-name="Abstrakte Farbwolke" data-img="https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&h=600&fit=crop" data-score="48">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 6: Menschen -->
-        <div class="gallery-item" data-category="menschen">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="Teamarbeit" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Kreatives Team am Arbeiten</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.69</span>
-              <span class="gallery-item-score">⭐ 68</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="69" data-name="Kreatives Team am Arbeiten" data-img="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" data-score="68">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 7: Natur -->
-        <div class="gallery-item" data-category="natur">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop" alt="Wald im Sonnenlicht" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Wald im goldenen Licht</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.99</span>
-              <span class="gallery-item-score">⭐ 91</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="99" data-name="Wald im goldenen Licht" data-img="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop" data-score="91">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 8: Architektur -->
-        <div class="gallery-item" data-category="architektur">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=800&h=600&fit=crop" alt="Stadtsilhouette" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Stadtsilhouette bei Nacht</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.89</span>
-              <span class="gallery-item-score">⭐ 84</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="89" data-name="Stadtsilhouette bei Nacht" data-img="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=800&h=600&fit=crop" data-score="84">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 9: Business -->
-        <div class="gallery-item" data-category="business">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Diagramme und Daten" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Datenvisualisierung Business</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.69</span>
-              <span class="gallery-item-score">⭐ 65</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="69" data-name="Datenvisualisierung Business" data-img="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" data-score="65">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 10: Technologie -->
-        <div class="gallery-item" data-category="technologie">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop" alt="Cyberpunk Stadt" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Cyberpunk Stadt bei Nacht</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.99</span>
-              <span class="gallery-item-score">⭐ 98</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="99" data-name="Cyberpunk Stadt bei Nacht" data-img="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop" data-score="98">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 11: Kreativ -->
-        <div class="gallery-item" data-category="kreativ">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&h=600&fit=crop" alt="Neon Kunst" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Neon Kunstinstallation</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.89</span>
-              <span class="gallery-item-score">⭐ 89</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="89" data-name="Neon Kunstinstallation" data-img="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&h=600&fit=crop" data-score="89">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <!-- Item 12: Menschen -->
-        <div class="gallery-item" data-category="menschen">
-          <div class="gallery-item-image">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop" alt="Lernende Studenten" loading="lazy">
-            <div class="gallery-item-overlay">
-              <button title="Vergrößern">🔍</button>
-              <button title="Zur Favoriten">🤍</button>
-            </div>
-          </div>
-          <div class="gallery-item-info">
-            <h4>Studenten beim Lernen</h4>
-            <div class="gallery-item-meta">
-              <span class="gallery-item-price">€0.49</span>
-              <span class="gallery-item-score low">⭐ 42</span>
-            </div>
-            <button class="btn btn-primary btn-sm add-to-cart-btn" data-price="49" data-name="Studenten beim Lernen" data-img="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop" data-score="42">In den Warenkorb</button>
-          </div>
-        </div>
-
+      <div id="gallery-container" class="gallery-grid">
+        <!-- Items will be loaded dynamically -->
       </div>
 
     </div>
@@ -429,6 +201,156 @@
       <button class="btn btn-primary cart-checkout-btn" id="cart-checkout">Zur Kasse →</button>
     </div>
   </div>
+
+  <script>
+  (function() {
+    'use strict';
+
+    const API_BASE = 'http://localhost:3001';
+    let allImages = [];
+    let currentCategory = 'all';
+    let currentSort = 'newest';
+
+    const container = document.getElementById('gallery-container');
+    const sortSelect = document.getElementById('gallery-sort');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function showLoading() {
+      container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem 0;color:var(--text-secondary);"><span style="font-size:2rem;display:block;margin-bottom:.5rem;">⏳</span>Lädt Bilder...</div>';
+    }
+
+    function showEmpty() {
+      container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem 0;color:var(--text-secondary);"><p style="margin-bottom:1rem;">Noch keine Bilder vorhanden</p></div>';
+    }
+
+    function showError(retryFn) {
+      container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem 0;color:var(--text-secondary);"><p style="margin-bottom:1rem;">Fehler beim Laden der Bilder</p><button class="btn btn-secondary" id="gallery-retry">Erneut versuchen</button></div>';
+      const btn = document.getElementById('gallery-retry');
+      if (btn) btn.addEventListener('click', retryFn);
+    }
+
+    function getScoreClass(score) {
+      return (score < 50) ? ' low' : '';
+    }
+
+    function formatPrice(cents) {
+      return '€' + (cents / 100).toFixed(2);
+    }
+
+    function buildImageUrl(filename) {
+      return API_BASE + '/uploads/' + encodeURIComponent(filename);
+    }
+
+    function renderGallery(images) {
+      if (!images || images.length === 0) {
+        showEmpty();
+        return;
+      }
+
+      const html = images.map(function(img) {
+        const src = buildImageUrl(img.filename);
+        const priceStr = formatPrice(img.price_cents);
+        const scoreClass = getScoreClass(img.score);
+        const scoreStr = '⭐ ' + img.score;
+        return '<div class="gallery-item" data-category="' + escapeHtml(img.category) + '" data-id="' + escapeHtml(String(img.id)) + '">' +
+          '<div class="gallery-item-image">' +
+            '<img src="' + escapeHtml(src) + '" alt="' + escapeHtml(img.title) + '" loading="lazy">' +
+            '<div class="gallery-item-overlay">' +
+              '<button title="Vergrößern">🔍</button>' +
+              '<button title="Zur Favoriten">🤍</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="gallery-item-info">' +
+            '<h4>' + escapeHtml(img.title) + '</h4>' +
+            '<div class="gallery-item-meta">' +
+              '<span class="gallery-item-price">' + escapeHtml(priceStr) + '</span>' +
+              '<span class="gallery-item-score' + scoreClass + '">' + escapeHtml(scoreStr) + '</span>' +
+            '</div>' +
+            '<button class="btn btn-primary btn-sm add-to-cart-btn" data-price="' + escapeHtml(String(img.price_cents)) + '" data-name="' + escapeHtml(img.title) + '" data-img="' + escapeHtml(src) + '" data-score="' + escapeHtml(String(img.score)) + '">In den Warenkorb</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      container.innerHTML = html;
+    }
+
+    function applySort(images) {
+      const arr = images.slice();
+      switch (currentSort) {
+        case 'newest':
+          arr.sort(function(a, b) { return new Date(b.created_at) - new Date(a.created_at); });
+          break;
+        case 'score':
+          arr.sort(function(a, b) { return b.score - a.score; });
+          break;
+        case 'price-low':
+          arr.sort(function(a, b) { return a.price_cents - b.price_cents; });
+          break;
+        case 'price-high':
+          arr.sort(function(a, b) { return b.price_cents - a.price_cents; });
+          break;
+      }
+      return arr;
+    }
+
+    function applyFilter(images) {
+      if (currentCategory === 'all') return images;
+      return images.filter(function(img) {
+        return img.category === currentCategory;
+      });
+    }
+
+    function updateDisplay() {
+      let displayImages = applyFilter(allImages);
+      displayImages = applySort(displayImages);
+      renderGallery(displayImages);
+    }
+
+    async function fetchImages() {
+      showLoading();
+      try {
+        const url = currentCategory === 'all'
+          ? API_BASE + '/api/images'
+          : API_BASE + '/api/images?category=' + encodeURIComponent(currentCategory);
+
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        allImages = data.images || [];
+        updateDisplay();
+      } catch (err) {
+        showError(fetchImages);
+      }
+    }
+
+    // Filter buttons
+    filterButtons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        filterButtons.forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        currentCategory = this.getAttribute('data-filter');
+        fetchImages();
+      });
+    });
+
+    // Sort dropdown
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function() {
+        currentSort = this.value;
+        updateDisplay();
+      });
+    }
+
+    // Initial load
+    fetchImages();
+  })();
+  </script>
 
   <script src="js/cart.js"></script>
   <script src="js/app.js"></script>

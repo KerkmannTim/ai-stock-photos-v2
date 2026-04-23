@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+*.sqlite
+*.sqlite-journal
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads (keep directory but not files)
+uploads/*
+!uploads/.gitkeep

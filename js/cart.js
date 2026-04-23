@@ -190,20 +190,20 @@
     if (cartClose) cartClose.addEventListener('click', closeCart);
     if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
 
-    // Add to cart buttons
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const item = {
-          id: btn.dataset.name || Date.now().toString(),
-          name: btn.dataset.name || 'Bild',
-          price: parseInt(btn.dataset.price) || 0,
-          img: btn.dataset.img || '',
-          score: btn.dataset.score || ''
-        };
-        addItem(item);
-      });
+    // Add to cart buttons (event delegation for dynamic items)
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.add-to-cart-btn');
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const item = {
+        id: btn.dataset.name || Date.now().toString(),
+        name: btn.dataset.name || 'Bild',
+        price: parseInt(btn.dataset.price) || 0,
+        img: btn.dataset.img || '',
+        score: btn.dataset.score || ''
+      };
+      addItem(item);
     });
 
     const checkoutBtn = document.getElementById('cart-checkout');
