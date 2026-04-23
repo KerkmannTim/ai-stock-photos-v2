@@ -250,7 +250,10 @@
         '</div>';
       document.body.appendChild(modal);
       modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          setTimeout(() => { modal.style.display = 'none'; }, 300);
+        }
       });
     }
 
@@ -260,6 +263,7 @@
     const successDiv = modal.querySelector('#payment-success');
 
     modal.style.display = 'flex';
+    modal.classList.add('active');
 
     if (status === 'processing') {
       icon.textContent = '⏳';
