@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zahlung erfolgreich — StockPhotoShop</title>
+  <meta name="description" content="Deine Zahlung war erfolgreich. Danke für deinen Einkauf bei StockPhotoShop!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .status-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+    .status-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+    .status-page h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      color: #f8fafc;
+    }
+    .status-page p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      max-width: 400px;
+      line-height: 1.6;
+    }
+    .status-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .status-details {
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      max-width: 400px;
+    }
+    .status-details code {
+      background: rgba(255,255,255,0.06);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="status-page">
+    <div class="status-icon">🎉</div>
+    <h1>Zahlung erfolgreich!</h1>
+    <p>Danke für deinen Einkauf bei StockPhotoShop. Deine Bilder stehen dir jetzt zum Download bereit.</p>
+
+    <div class="status-actions">
+      <a href="gallery.html" class="btn btn-primary btn-lg">Zur Galerie</a>
+      <a href="profile.html" class="btn btn-secondary btn-lg">Meine Käufe</a>
+    </div>
+
+    <div class="status-details" id="session-details" style="display:none;">
+      Session-ID: <code id="session-id">—</code>
+    </div>
+  </div>
+
+  <script>
+    // Show session ID from URL if present
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+    if (sessionId) {
+      document.getElementById('session-id').textContent = sessionId;
+      document.getElementById('session-details').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

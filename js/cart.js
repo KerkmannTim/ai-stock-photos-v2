@@ -217,21 +217,41 @@
   }
 
   // ===== CHECKOUT =====
-  function handleCheckout() {
+  async function handleCheckout() {
     if (cart.length === 0) return;
 
     const total = getTotal();
     const itemNames = cart.map(i => i.name).join(', ');
+    const imageIds = cart.map(i => i.id);
 
     closeCart();
     showPaymentModal('processing', itemNames, total);
 
-    setTimeout(() => {
-      showPaymentModal('success', itemNames, total);
-    }, 2500);
+    try {
+      const res = await fetch('http://localhost:3001/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image_ids: imageIds })
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || 'Checkout-Fehler');
+      }
+
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url; // Redirect to Stripe
+      } else {
+        throw new Error('Keine Checkout-URL erhalten');
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      showPaymentModal('error', itemNames, total, err.message);
+    }
   }
 
-  function showPaymentModal(status, itemName, totalCents) {
+  function showPaymentModal(status, itemName, totalCents, errorMsg) {
     let modal = document.getElementById('payment-modal');
     if (!modal) {
       modal = document.createElement('div');
@@ -247,6 +267,10 @@
             '<p style="color:var(--success);margin-bottom:1rem;">✅ Zahlung erfolgreich!</p>' +
             '<button class="btn btn-secondary" onclick="document.getElementById(\'payment-modal\').style.display=\'none\'">Zur\u00fcck zur Seite</button>' +
           '</div>' +
+          '<div id="payment-error" style="display:none;margin-top:1.5rem;">' +
+            '<p style="color:var(--danger);margin-bottom:1rem;">❌ Fehler: <span id="payment-error-msg"></span></p>' +
+            '<button class="btn btn-secondary" onclick="document.getElementById(\'payment-modal\').style.display=\'none\'">Schlie\u00dfen</button>' +
+          '</div>' +
         '</div>';
       document.body.appendChild(modal);
       modal.addEventListener('click', (e) => {
@@ -261,21 +285,31 @@
     const title = modal.querySelector('#payment-status-title');
     const text = modal.querySelector('#payment-status-text');
     const successDiv = modal.querySelector('#payment-success');
+    const errorDiv = modal.querySelector('#payment-error');
+    const errorMsgEl = modal.querySelector('#payment-error-msg');
 
     modal.style.display = 'flex';
     modal.classList.add('active');
 
+    if (successDiv) successDiv.style.display = 'none';
+    if (errorDiv) errorDiv.style.display = 'none';
+
     if (status === 'processing') {
       icon.textContent = '⏳';
       title.textContent = 'Zahlung wird verarbeitet...';
-      text.textContent = 'Summe: €' + formatPrice(totalCents) + ' — Bitte warte einen Moment...';
-      if (successDiv) successDiv.style.display = 'none';
+      text.textContent = 'Summe: €' + formatPrice(totalCents) + ' — Leite zu Stripe weiter...';
     } else if (status === 'success') {
       icon.textContent = '🎉';
       title.textContent = 'Zahlung erfolgreich!';
       text.textContent = 'Danke f\u00fcr deinen Einkauf! Summe: €' + formatPrice(totalCents);
       if (successDiv) successDiv.style.display = 'block';
       clearCart();
+    } else if (status === 'error') {
+      icon.textContent = '⚠️';
+      title.textContent = 'Zahlung fehlgeschlagen';
+      text.textContent = 'Bei der Weiterleitung zu Stripe ist ein Fehler aufgetreten.';
+      if (errorDiv) errorDiv.style.display = 'block';
+      if (errorMsgEl) errorMsgEl.textContent = errorMsg || 'Unbekannter Fehler';
     }
   }
 

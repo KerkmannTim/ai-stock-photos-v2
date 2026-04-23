@@ -1,0 +1,58 @@
+[
+  {
+    "source_path": "test_images/natur-berge.jpg",
+    "filename": "natur-berge.jpg",
+    "title": "Morgennebel über Bergen",
+    "category": "natur",
+    "score": 87
+  },
+  {
+    "source_path": "test_images/architektur-glas.jpg",
+    "filename": "architektur-glas.jpg",
+    "title": "Moderne Glasfassade",
+    "category": "architektur",
+    "score": 93
+  },
+  {
+    "source_path": "test_images/business-meeting.jpg",
+    "filename": "business-meeting.jpg",
+    "title": "Business Meeting im Büro",
+    "category": "business",
+    "score": 72
+  },
+  {
+    "source_path": "test_images/technologie-schaltkreis.jpg",
+    "filename": "technologie-schaltkreis.jpg",
+    "title": "Abstrakte Schaltkreise",
+    "category": "technologie",
+    "score": 95
+  },
+  {
+    "source_path": "test_images/kreativ-farben.jpg",
+    "filename": "kreativ-farben.jpg",
+    "title": "Abstrakte Farbwolke",
+    "category": "kreativ",
+    "score": 48
+  },
+  {
+    "source_path": "test_images/menschen-team.jpg",
+    "filename": "menschen-team.jpg",
+    "title": "Kreatives Team am Arbeiten",
+    "category": "menschen",
+    "score": 68
+  },
+  {
+    "source_path": "test_images/natur-wald.jpg",
+    "filename": "natur-wald.jpg",
+    "title": "Wald im goldenen Licht",
+    "category": "natur",
+    "score": 91
+  },
+  {
+    "source_path": "test_images/architektur-stadt.jpg",
+    "filename": "architektur-stadt.jpg",
+    "title": "Stadtsilhouette bei Nacht",
+    "category": "architektur",
+    "score": 84
+  }
+]

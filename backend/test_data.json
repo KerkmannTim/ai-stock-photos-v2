@@ -1,14 +1,86 @@
 [
-  {"filename":"natur-berge.jpg","title":"Morgennebel über Bergen","category":"natur","score":87},
-  {"filename":"architektur-glas.jpg","title":"Moderne Glasfassade","category":"architektur","score":93},
-  {"filename":"business-meeting.jpg","title":"Business Meeting im Büro","category":"business","score":72},
-  {"filename":"technologie-schaltkreis.jpg","title":"Abstrakte Schaltkreise","category":"technologie","score":95},
-  {"filename":"kreativ-farben.jpg","title":"Abstrakte Farbwolke","category":"kreativ","score":48},
-  {"filename":"menschen-team.jpg","title":"Kreatives Team am Arbeiten","category":"menschen","score":68},
-  {"filename":"natur-wald.jpg","title":"Wald im goldenen Licht","category":"natur","score":91},
-  {"filename":"architektur-stadt.jpg","title":"Stadtsilhouette bei Nacht","category":"architektur","score":84},
-  {"filename":"business-daten.jpg","title":"Datenvisualisierung Business","category":"business","score":65},
-  {"filename":"technologie-cyberpunk.jpg","title":"Cyberpunk Stadt bei Nacht","category":"technologie","score":98},
-  {"filename":"kreativ-neon.jpg","title":"Neon Kunstinstallation","category":"kreativ","score":89},
-  {"filename":"menschen-studenten.jpg","title":"Studenten beim Lernen","category":"menschen","score":42}
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/natur-berge.jpg",
+    "filename": "natur-berge.jpg",
+    "title": "Morgennebel über Bergen",
+    "category": "natur",
+    "score": 87
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/architektur-glas.jpg",
+    "filename": "architektur-glas.jpg",
+    "title": "Moderne Glasfassade",
+    "category": "architektur",
+    "score": 93
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/business-meeting.jpg",
+    "filename": "business-meeting.jpg",
+    "title": "Business Meeting im Büro",
+    "category": "business",
+    "score": 72
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/technologie-schaltkreis.jpg",
+    "filename": "technologie-schaltkreis.jpg",
+    "title": "Abstrakte Schaltkreise",
+    "category": "technologie",
+    "score": 95
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/kreativ-farben.jpg",
+    "filename": "kreativ-farben.jpg",
+    "title": "Abstrakte Farbwolke",
+    "category": "kreativ",
+    "score": 48
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/menschen-team.jpg",
+    "filename": "menschen-team.jpg",
+    "title": "Kreatives Team am Arbeiten",
+    "category": "menschen",
+    "score": 68
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/natur-wald.jpg",
+    "filename": "natur-wald.jpg",
+    "title": "Wald im goldenen Licht",
+    "category": "natur",
+    "score": 91
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/architektur-stadt.jpg",
+    "filename": "architektur-stadt.jpg",
+    "title": "Stadtsilhouette bei Nacht",
+    "category": "architektur",
+    "score": 84
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/business-daten.jpg",
+    "filename": "business-daten.jpg",
+    "title": "Datenvisualisierung Business",
+    "category": "business",
+    "score": 65
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/technologie-cyberpunk.jpg",
+    "filename": "technologie-cyberpunk.jpg",
+    "title": "Cyberpunk Stadt bei Nacht",
+    "category": "technologie",
+    "score": 98
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/kreativ-neon.jpg",
+    "filename": "kreativ-neon.jpg",
+    "title": "Neon Kunstinstallation",
+    "category": "kreativ",
+    "score": 89
+  },
+  {
+    "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/menschen-studenten.jpg",
+    "filename": "menschen-studenten.jpg",
+    "title": "Studenten beim Lernen",
+    "category": "menschen",
+    "score": 42
+  }
 ]

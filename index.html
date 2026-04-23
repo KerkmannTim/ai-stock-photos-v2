@@ -27,6 +27,10 @@
         <li><a href="profile.html">Login</a></li>
       </ul>
       <div class="nav-actions">
+        <button id="cart-toggle" class="cart-toggle" aria-label="Warenkorb">
+          <span class="cart-icon">🛒</span>
+          <span id="cart-badge" class="cart-badge">0</span>
+        </button>
         <button class="hamburger" aria-label="Menü öffnen" aria-expanded="false">
           <span></span>
           <span></span>
@@ -194,6 +198,31 @@
     </div>
   </footer>
 
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h2>🛒 Warenkorb</h2>
+      <button class="cart-close" id="cart-close" aria-label="Schließen">✕</button>
+    </div>
+    <div class="cart-body">
+      <div class="cart-empty" id="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <p>Dein Warenkorb ist leer</p>
+        <a href="gallery.html" class="btn btn-secondary">Zur Galerie</a>
+      </div>
+      <div id="cart-items"></div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Gesamt</span>
+        <span class="cart-total-price" id="cart-total">€0,00</span>
+      </div>
+      <button class="btn btn-primary cart-checkout-btn" id="cart-checkout">Zur Kasse →</button>
+    </div>
+  </div>
+
+  <script src="js/cart.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

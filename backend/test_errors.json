@@ -1,0 +1,8 @@
+[
+  { "source_path": "/nonexistent/path.jpg", "filename": "bad-path.jpg", "title": "Bad path", "category": "test", "score": 50 },
+  { "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/natur-berge.jpg", "filename": "natur-berge.jpg", "title": "Duplicate", "category": "test", "score": 50 },
+  { "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/server.js", "filename": "server.js", "title": "Not an image", "category": "test", "score": 50 },
+  { "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/natur-berge.jpg", "filename": "", "title": "Missing filename", "category": "test", "score": 50 },
+  { "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/natur-berge.jpg", "filename": "bad-score.jpg", "title": "Bad score", "category": "test", "score": 150 },
+  { "source_path": "/data/.openclaw/workspace/projects/stock-photo-shop-v2/backend/test_images/natur-berge.jpg", "filename": "bad-score2.jpg", "title": "Bad score negative", "category": "test", "score": -5 }
+]
