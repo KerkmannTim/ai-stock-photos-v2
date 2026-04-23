@@ -2114,3 +2114,303 @@ button {
 .add-to-cart-btn {
   white-space: nowrap;
 }
+
+/* ============================================
+   MOBILE FIXES (max-width: 768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Navbar with cart */
+  .navbar-inner {
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  .logo-icon {
+    font-size: 1.25rem;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .cart-toggle {
+    font-size: 1.25rem;
+    padding: 6px;
+  }
+
+  .cart-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+  }
+
+  /* Gallery on mobile */
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .gallery-item-image {
+    aspect-ratio: 16 / 10;
+  }
+
+  .gallery-item-info {
+    padding: 14px;
+  }
+
+  .gallery-item-info h4 {
+    font-size: 1rem;
+  }
+
+  .gallery-item-meta {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .gallery-item-price,
+  .gallery-item-score {
+    font-size: 0.85rem;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 16px;
+  }
+
+  /* Hero */
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Section headers */
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+
+  /* Cart drawer on mobile */
+  .cart-drawer {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .cart-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .cart-item-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .cart-item-name {
+    font-size: 0.85rem;
+  }
+
+  .cart-footer {
+    padding: 1rem;
+  }
+
+  .cart-total-price {
+    font-size: 1.1rem;
+  }
+
+  .cart-checkout-btn {
+    padding: 12px;
+  }
+
+  /* Modal on mobile */
+  .modal-content {
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+
+  .modal-sidebar {
+    padding: 16px;
+  }
+
+  .modal-sidebar .btn-lg {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  /* Pricing page */
+  .score-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .score-table {
+    min-width: 500px;
+  }
+
+  /* About page */
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Profile */
+  .profile-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+  }
+
+  .profile-tab {
+    white-space: nowrap;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================
+   SMALL MOBILE FIXES (max-width: 480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .hero-stats .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .hero-stats .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .section {
+    padding: 48px 0;
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-header p {
+    font-size: 0.95rem;
+  }
+
+  .gallery-grid {
+    gap: 12px;
+  }
+
+  .gallery-item-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .category-card {
+    padding: 16px;
+  }
+
+  .category-icon {
+    font-size: 2rem;
+  }
+
+  .pricing-grid {
+    gap: 16px;
+  }
+
+  .pricing-card {
+    padding: 24px 20px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Cart */
+  .cart-item {
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .cart-item-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .cart-item-info {
+    min-width: 0;
+  }
+
+  .cart-item-name {
+    font-size: 0.8rem;
+  }
+
+  .cart-item-price {
+    font-size: 0.8rem;
+  }
+
+  .cart-item-remove {
+    padding: 4px;
+  }
+
+  .cart-item-remove svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cart-footer {
+    padding: 12px 16px;
+  }
+
+  .cart-total-label {
+    font-size: 0.95rem;
+  }
+
+  .cart-total-price {
+    font-size: 1.1rem;
+  }
+
+  .cart-checkout-btn {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+}
