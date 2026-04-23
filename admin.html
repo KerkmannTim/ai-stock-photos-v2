@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel-Forge.ai — Admin Panel</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --bg-elevated: #18181f;
+    --bg-card: #1e1e28;
+    --bg-hover: #262633;
+    --border: #2a2a38;
+    --text: #e2e2ea;
+    --text-muted: #8b8ba0;
+    --accent: #7c3aed;
+    --accent-light: #a78bfa;
+    --accent-dark: #5b21b6;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --radius: 12px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  /* LOGIN */
+  #login-screen {
+    display:flex; align-items:center; justify-content:center;
+    height:100vh; width:100vw;
+    background: radial-gradient(ellipse at 30% 20%, #1a103c 0%, var(--bg) 60%);
+  }
+  .login-box {
+    width:380px; padding:40px;
+    background: var(--bg-card);
+    border:1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+  .login-box h1 {
+    font-size:1.6rem; font-weight:700;
+    text-align:center; margin-bottom:8px;
+    background: linear-gradient(135deg, var(--accent-light), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .login-box p { text-align:center; color:var(--text-muted); margin-bottom:28px; font-size:0.9rem; }
+  .login-box label { display:block; font-size:0.8rem; color:var(--text-muted); margin-bottom:6px; margin-top:16px; }
+  .login-box input {
+    width:100%; padding:12px 14px;
+    background: var(--bg-elevated); color:var(--text);
+    border:1px solid var(--border); border-radius:8px;
+    font-size:0.95rem; outline:none; transition:border-color .2s;
+  }
+  .login-box input:focus { border-color: var(--accent); }
+  .login-box button {
+    width:100%; margin-top:24px; padding:12px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color:#fff; font-weight:600; font-size:0.95rem;
+    border:none; border-radius:8px; cursor:pointer;
+    transition: opacity .2s, transform .1s;
+  }
+  .login-box button:hover { opacity:0.9; }
+  .login-box button:active { transform:scale(0.98); }
+  .login-error { color:var(--danger); font-size:0.85rem; margin-top:10px; text-align:center; display:none; }
+
+  /* APP */
+  #app { display:none; height:100vh; }
+  .sidebar {
+    position:fixed; left:0; top:0; bottom:0; width:240px;
+    background: var(--bg-elevated);
+    border-right:1px solid var(--border);
+    display:flex; flex-direction:column;
+    padding:24px 0;
+  }
+  .sidebar-brand {
+    padding:0 24px 24px;
+    font-size:1.2rem; font-weight:700;
+    display:flex; align-items:center; gap:10px;
+  }
+  .sidebar-brand .logo-icon {
+    width:32px; height:32px; border-radius:8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem;
+  }
+  .sidebar-nav { flex:1; padding:0 12px; }
+  .sidebar-nav a {
+    display:flex; align-items:center; gap:12px;
+    padding:10px 16px; margin-bottom:4px;
+    color:var(--text-muted); text-decoration:none;
+    border-radius:8px; font-size:0.9rem; font-weight:500;
+    transition: all .15s; cursor:pointer;
+  }
+  .sidebar-nav a:hover, .sidebar-nav a.active {
+    background: var(--bg-hover); color:var(--text);
+  }
+  .sidebar-nav a.active { color:var(--accent-light); }
+  .sidebar-footer {
+    padding:16px 24px; border-top:1px solid var(--border);
+    font-size:0.8rem; color:var(--text-muted);
+  }
+
+  .main { margin-left:240px; min-height:100vh; }
+  .topbar {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px; border-bottom:1px solid var(--border);
+    background: var(--bg-elevated);
+    position:sticky; top:0; z-index:10;
+  }
+  .topbar h2 { font-size:1.15rem; font-weight:600; }
+  .topbar-user { display:flex; align-items:center; gap:12px; font-size:0.9rem; color:var(--text-muted); }
+  .topbar-user button {
+    background:var(--bg-card); border:1px solid var(--border);
+    color:var(--text); padding:6px 14px; border-radius:6px;
+    cursor:pointer; font-size:0.85rem; transition:all .15s;
+  }
+  .topbar-user button:hover { background:var(--bg-hover); }
+
+  .content { padding:24px 32px; }
+
+  /* STATS CARDS */
+  .stats-grid {
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap:20px; margin-bottom:28px;
+  }
+  .stat-card {
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius: var(--radius); padding:20px 22px;
+    transition: transform .15s, box-shadow .2s;
+  }
+  .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .stat-card .label { font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; }
+  .stat-card .value { font-size:1.7rem; font-weight:700; margin-top:6px; }
+  .stat-card .change { font-size:0.8rem; margin-top:6px; }
+  .stat-card .change.up { color:var(--success); }
+  .stat-card .change.down { color:var(--danger); }
+  .stat-card.stat-accent { border-left:3px solid var(--accent); }
+  .stat-card.stat-success { border-left:3px solid var(--success); }
+  .stat-card.stat-warning { border-left:3px solid var(--warning); }
+
+  /* SECTION */
+  .section { display:none; }
+  .section.active { display:block; }
+  .section-header {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:18px;
+  }
+  .section-header h3 { font-size:1.1rem; font-weight:600; }
+
+  /* BUTTONS */
+  .btn {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 16px; border-radius:8px; font-size:0.85rem;
+    font-weight:500; cursor:pointer; border:none;
+    transition: all .15s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color:#fff;
+  }
+  .btn-primary:hover { opacity:0.9; }
+  .btn-danger { background: var(--danger); color:#fff; }
+  .btn-ghost { background: var(--bg-card); color:var(--text); border:1px solid var(--border); }
+  .btn-ghost:hover { background: var(--bg-hover); }
+  .btn-sm { padding:6px 12px; font-size:0.8rem; }
+
+  /* UPLOAD DROPZONE */
+  .dropzone {
+    border:2px dashed var(--border); border-radius: var(--radius);
+    padding:48px 24px; text-align:center;
+    background: var(--bg-elevated);
+    transition: all .2s; cursor:pointer;
+    margin-bottom:20px;
+  }
+  .dropzone.dragover {
+    border-color: var(--accent); background: rgba(124,58,237,0.08);
+  }
+  .dropzone-icon { font-size:2.5rem; margin-bottom:12px; opacity:0.7; }
+  .dropzone p { color:var(--text-muted); font-size:0.9rem; }
+  .dropzone p strong { color:var(--text); }
+  .upload-meta { display:flex; gap:16px; margin-bottom:20px; flex-wrap:wrap; }
+  .upload-meta select, .upload-meta input {
+    background: var(--bg-card); color:var(--text);
+    border:1px solid var(--border); border-radius:8px;
+    padding:8px 12px; font-size:0.85rem; outline:none;
+  }
+
+  /* PROGRESS */
+  .upload-queue { margin-top:16px; }
+  .upload-item {
+    display:flex; align-items:center; gap:14px;
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius:10px; padding:12px 16px; margin-bottom:10px;
+  }
+  .upload-thumb {
+    width:48px; height:48px; border-radius:8px; object-fit:cover;
+    background: var(--bg-hover); flex-shrink:0;
+  }
+  .upload-info { flex:1; min-width:0; }
+  .upload-info .name { font-size:0.9rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .upload-info .meta { font-size:0.75rem; color:var(--text-muted); margin-top:2px; }
+  .upload-progress { flex:1; max-width:200px; }
+  .progress-bar-bg {
+    height:6px; background: var(--bg-hover); border-radius:3px; overflow:hidden;
+  }
+  .progress-bar-fill {
+    height:100%; width:0%; background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    border-radius:3px; transition: width .2s;
+  }
+  .upload-status { font-size:0.8rem; min-width:50px; text-align:right; }
+  .upload-status.done { color:var(--success); }
+  .upload-status.error { color:var(--danger); }
+
+  /* FILTERS */
+  .filters {
+    display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .filters input, .filters select {
+    background: var(--bg-card); color:var(--text);
+    border:1px solid var(--border); border-radius:8px;
+    padding:8px 12px; font-size:0.85rem; outline:none;
+  }
+  .filters input { min-width:220px; }
+
+  /* IMAGE GRID / TABLE */
+  .image-table {
+    width:100%; border-collapse: collapse;
+    font-size:0.9rem;
+  }
+  .image-table th, .image-table td {
+    padding:12px 14px; text-align:left; border-bottom:1px solid var(--border);
+  }
+  .image-table th {
+    color:var(--text-muted); font-weight:600; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px;
+    background: var(--bg-elevated);
+  }
+  .image-table tr:hover td { background: var(--bg-hover); }
+  .image-table td { vertical-align:middle; }
+  .img-cell { display:flex; align-items:center; gap:12px; }
+  .img-cell img {
+    width:44px; height:44px; border-radius:8px; object-fit:cover;
+    background: var(--bg-hover);
+  }
+  .img-cell .title { font-weight:500; }
+  .img-cell .sub { font-size:0.78rem; color:var(--text-muted); }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px;
+    font-size:0.75rem; font-weight:500; background: var(--bg-hover);
+    border:1px solid var(--border); color:var(--text-muted);
+  }
+  .tag.tag-nature { color:#4ade80; border-color:#166534; background:#14532d; }
+  .tag.tag-urban { color:#60a5fa; border-color:#1e40af; background:#172554; }
+  .tag.tag-abstract { color:#f472b6; border-color:#9d174d; background:#831843; }
+  .tag.tag-portrait { color:#fbbf24; border-color:#92400e; background:#78350f; }
+  .price-input {
+    width:80px; padding:4px 8px;
+    background: var(--bg-elevated); color:var(--text);
+    border:1px solid var(--border); border-radius:6px;
+    font-size:0.85rem; outline:none;
+  }
+  .actions { display:flex; gap:6px; }
+  .actions button { padding:5px 10px; font-size:0.8rem; border-radius:6px; cursor:pointer; border:none; }
+  .actions .btn-edit { background:var(--bg-hover); color:var(--text); border:1px solid var(--border); }
+  .actions .btn-edit:hover { background:var(--bg-card); }
+  .actions .btn-del { background:transparent; color:var(--danger); border:1px solid var(--danger); }
+  .actions .btn-del:hover { background:var(--danger); color:#fff; }
+
+  /* MODAL */
+  .modal-overlay {
+    position:fixed; inset:0; background: rgba(0,0,0,0.6);
+    display:none; align-items:center; justify-content:center; z-index:100;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { display:flex; }
+  .modal {
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius: var(--radius); width:460px; max-width:90vw;
+    box-shadow: var(--shadow); overflow:hidden;
+  }
+  .modal-header {
+    padding:18px 22px; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .modal-header h4 { font-size:1rem; }
+  .modal-header .close {
+    background:none; border:none; color:var(--text-muted); font-size:1.2rem; cursor:pointer;
+  }
+  .modal-body { padding:22px; }
+  .modal-body label { display:block; font-size:0.8rem; color:var(--text-muted); margin-bottom:6px; margin-top:14px; }
+  .modal-body input, .modal-body select, .modal-body textarea {
+    width:100%; padding:10px 12px;
+    background: var(--bg-elevated); color:var(--text);
+    border:1px solid var(--border); border-radius:8px;
+    font-size:0.9rem; outline:none;
+  }
+  .modal-body textarea { min-height:80px; resize:vertical; }
+  .modal-footer {
+    padding:14px 22px; border-top:1px solid var(--border);
+    display:flex; justify-content:flex-end; gap:10px;
+  }
+
+  /* TOAST */
+  .toast-container {
+    position:fixed; top:20px; right:20px; z-index:200;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .toast {
+    padding:12px 18px; border-radius:10px; color:#fff; font-size:0.9rem;
+    box-shadow: var(--shadow); animation: toastIn .3s ease;
+    min-width:220px;
+  }
+  .toast.success { background: var(--success); }
+  .toast.error { background: var(--danger); }
+  .toast.info { background: var(--accent); }
+  @keyframes toastIn { from { opacity:0; transform:translateX(20px);} to { opacity:1; transform:translateX(0);} }
+
+  /* RESPONSIVE */
+  @media (max-width:900px) {
+    .sidebar { width:64px; padding:16px 0; }
+    .sidebar-brand span, .sidebar-nav a span { display:none; }
+    .sidebar-brand { justify-content:center; padding:0 0 16px; }
+    .sidebar-nav a { justify-content:center; padding:12px; }
+    .main { margin-left:64px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== LOGIN ==================== -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>Pixel-Forge.ai</h1>
+    <p>Admin Panel — Bild-Management</p>
+    <label>Benutzername</label>
+    <input type="text" id="login-user" placeholder="admin" value="admin" autocomplete="off">
+    <label>Passwort</label>
+    <input type="password" id="login-pass" placeholder="••••••" value="admin123">
+    <button onclick="doLogin()">Anmelden</button>
+    <div class="login-error" id="login-error">Falsche Zugangsdaten</div>
+  </div>
+</div>
+
+<!-- ==================== APP ==================== -->
+<div id="app">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-icon">🎨</div>
+      <span>Pixel-Forge</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="active" data-page="dashboard" onclick="showPage('dashboard')">
+        <span>📊</span><span>Dashboard</span>
+      </a>
+      <a href="#" data-page="upload" onclick="showPage('upload')">
+        <span>⬆️</span><span>Upload</span>
+      </a>
+      <a href="#" data-page="images" onclick="showPage('images')">
+        <span>🖼️</span><span>Bilder</span>
+      </a>
+      <a href="#" data-page="stats" onclick="showPage('stats')">
+        <span>📈</span><span>Statistiken</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      v1.0.0 &middot; Pixel-Forge.ai
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <h2 id="page-title">Dashboard</h2>
+      <div class="topbar-user">
+        <span>👤 Admin</span>
+        <button onclick="logout()">Abmelden</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ====== DASHBOARD ====== -->
+      <div class="section active" id="dashboard">
+        <div class="stats-grid">
+          <div class="stat-card stat-accent">
+            <div class="label">Bilder gesamt</div>
+            <div class="value" id="dash-total">0</div>
+            <div class="change up">+12 diese Woche</div>
+          </div>
+          <div class="stat-card stat-success">
+            <div class="label">Verkäufe heute</div>
+            <div class="value" id="dash-sales">0</div>
+            <div class="change up">+3 vs. gestern</div>
+          </div>
+          <div class="stat-card stat-warning">
+            <div class="label">Umsatz (€)</div>
+            <div class="value" id="dash-revenue">0 €</div>
+            <div class="change up">+18% vs. gestern</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Durchschn. Score</div>
+            <div class="value" id="dash-score">0.0</div>
+            <div class="change">basierend auf KI-Bewertung</div>
+          </div>
+        </div>
+
+        <div class="section-header"><h3>Neueste Bilder</h3>
+          <button class="btn btn-primary btn-sm" onclick="showPage('upload')">+ Bild hochladen</button>
+        </div>
+        <table class="image-table" id="dash-table">
+          <thead><tr><th>Bild</th><th>Kategorie</th><th>Preis</th><th>Score</th><th>Datum</th></tr></thead>
+          <tbody id="dash-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- ====== UPLOAD ====== -->
+      <div class="section" id="upload">
+        <div class="section-header"><h3>Bilder hochladen</h3></div>
+        <div class="upload-meta">
+          <select id="upload-cat">
+            <option value="">Kategorie wählen...</option>
+            <option value="nature">Natur</option>
+            <option value="urban">Urban</option>
+            <option value="abstract">Abstrakt</option>
+            <option value="portrait">Portrait</option>
+          </select>
+          <input type="text" id="upload-tags" placeholder="Tags (kommasepariert)">
+        </div>
+        <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+          <div class="dropzone-icon">🖼️</div>
+          <p><strong>Dateien hierher ziehen</strong> oder klicken zum Auswählen</p>
+          <p style="margin-top:8px; font-size:0.8rem;">PNG, JPG, WEBP — bis 10 MB pro Datei</p>
+        </div>
+        <input type="file" id="fileInput" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+        <div class="upload-queue" id="upload-queue"></div>
+      </div>
+
+      <!-- ====== IMAGES ====== -->
+      <div class="section" id="images">
+        <div class="section-header">
+          <h3>Alle Bilder</h3>
+          <button class="btn btn-primary btn-sm" onclick="showPage('upload')">+ Bild hochladen</button>
+        </div>
+        <div class="filters">
+          <input type="text" id="search-input" placeholder="🔍 Suche nach Titel..." oninput="renderImages()">
+          <select id="filter-cat" onchange="renderImages()">
+            <option value="">Alle Kategorien</option>
+            <option value="nature">Natur</option>
+            <option value="urban">Urban</option>
+            <option value="abstract">Abstrakt</option>
+            <option value="portrait">Portrait</option>
+          </select>
+          <select id="filter-sort" onchange="renderImages()">
+            <option value="newest">Neueste zuerst</option>
+            <option value="oldest">Älteste zuerst</option>
+            <option value="price-h">Preis ↓</option>
+            <option value="price-l">Preis ↑</option>
+            <option value="score-h">Score ↓</option>
+          </select>
+        </div>
+        <table class="image-table" id="img-table">
+          <thead>
+            <tr>
+              <th>Bild</th><th>Kategorie</th><th>Preis</th><th>Score</th><th>Hochgeladen</th><th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody id="img-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- ====== STATS ====== -->
+      <div class="section" id="stats">
+        <div class="section-header"><h3>Statistiken</h3></div>
+        <div class="stats-grid">
+          <div class="stat-card stat-accent">
+            <div class="label">Bilder gesamt</div>
+            <div class="value" id="stat-total">0</div>
+          </div>
+          <div class="stat-card stat-success">
+            <div class="label">Verkäufe heute</div>
+            <div class="value" id="stat-sales">0</div>
+          </div>
+          <div class="stat-card stat-warning">
+            <div class="label">Umsatz heute</div>
+            <div class="value" id="stat-revenue">0 €</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Verkäufe diese Woche</div>
+            <div class="value" id="stat-week">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Umsatz diese Woche</div>
+            <div class="value" id="stat-week-rev">0 €</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Durchschn. Bildpreis</div>
+            <div class="value" id="stat-avg-price">0 €</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ====== EDIT MODAL ====== -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h4>Bild bearbeiten</h4>
+      <button class="close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <label>Titel</label>
+      <input type="text" id="edit-title">
+      <label>Kategorie</label>
+      <select id="edit-cat">
+        <option value="nature">Natur</option>
+        <option value="urban">Urban</option>
+        <option value="abstract">Abstrakt</option>
+        <option value="portrait">Portrait</option>
+      </select>
+      <label>Preis (€)</label>
+      <input type="number" id="edit-price" step="0.01" min="0">
+      <label>Tags</label>
+      <input type="text" id="edit-tags">
+      <label>Beschreibung</label>
+      <textarea id="edit-desc"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Abbrechen</button>
+      <button class="btn btn-primary" onclick="saveEdit()">Speichern</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== TOASTS ====== -->
+<div class="toast-container" id="toasts"></div>
+
+<script>
+/* ===================== DATA & STATE ===================== */
+const DEMO_IMAGES = [
+  { id:1, title:'Morgennebel im Wald', cat:'nature', price:12.50, score:8.7, date:'2026-04-23', sales:3, thumb:'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=200&q=80' },
+  { id:2, title:'Neon Stadtlichter', cat:'urban', price:18.00, score:9.1, date:'2026-04-22', sales:5, thumb:'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=200&q=80' },
+  { id:3, title:'Abstrakte Wellen', cat:'abstract', price:9.99, score:7.4, date:'2026-04-21', sales:1, thumb:'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=200&q=80' },
+  { id:4, title:'Porträt im Studio', cat:'portrait', price:24.00, score:8.9, date:'2026-04-20', sales:2, thumb:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80' },
+  { id:5, title:'Bergsee Panorama', cat:'nature', price:15.00, score:9.3, date:'2026-04-19', sales:4, thumb:'https://images.unsplash.com/photo-1439853949127-fa647821eba0?w=200&q=80' },
+  { id:6, title:'Architektur Details', cat:'urban', price:11.50, score:7.8, date:'2026-04-18', sales:0, thumb:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=200&q=80' },
+];
+
+let images = [...DEMO_IMAGES];
+let editingId = null;
+let nextId = 100;
+
+/* ===================== AUTH ===================== */
+function doLogin() {
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value;
+  // hardcoded admin login
+  if (u === 'admin' && p === 'admin123') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    refreshAll();
+    toast('Erfolgreich angemeldet', 'success');
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+function logout() {
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-error').style.display = 'none';
+}
+
+/* ===================== NAV ===================== */
+function showPage(page) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+  document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+  document.querySelector(`.sidebar-nav a[data-page="${page}"]`).classList.add('active');
+  const titles = { dashboard:'Dashboard', upload:'Upload', images:'Bilder', stats:'Statistiken' };
+  document.getElementById('page-title').textContent = titles[page] || page;
+  refreshAll();
+}
+
+/* ===================== DASHBOARD ===================== */
+function refreshDashboard() {
+  const total = images.length;
+  const today = new Date().toISOString().slice(0,10);
+  const salesToday = images.filter(i => i.date === today).reduce((s,i) => s + (i.sales||0), 0);
+  const revToday = images.filter(i => i.date === today).reduce((s,i) => s + (i.sales||0)*i.price, 0);
+  const avgScore = images.length ? (images.reduce((s,i)=>s+i.score,0)/images.length).toFixed(1) : '0.0';
+  document.getElementById('dash-total').textContent = total;
+  document.getElementById('dash-sales').textContent = salesToday;
+  document.getElementById('dash-revenue').textContent = revToday.toFixed(2) + ' €';
+  document.getElementById('dash-score').textContent = avgScore;
+  // latest 5 images
+  const tbody = document.getElementById('dash-tbody');
+  tbody.innerHTML = images.slice().sort((a,b)=>b.id-a.id).slice(0,5).map(img => `
+    <tr>
+      <td><div class="img-cell"><img src="${img.thumb}" alt=""><div><div class="title">${esc(img.title)}</div><div class="sub">${img.date}</div></div></div></td>
+      <td><span class="tag tag-${img.cat}">${catLabel(img.cat)}</span></td>
+      <td>${img.price.toFixed(2)} €</td>
+      <td>${img.score}</td>
+      <td>${img.date}</td>
+    </tr>
+  `).join('');
+}
+
+/* ===================== UPLOAD ===================== */
+const dropzone = document.getElementById('dropzone');
+['dragenter','dragover','dragleave','drop'].forEach(e=>{
+  dropzone.addEventListener(e, ev=>{ ev.preventDefault(); ev.stopPropagation(); });
+});
+['dragenter','dragover'].forEach(e=>{
+  dropzone.addEventListener(e, ()=> dropzone.classList.add('dragover'));
+});
+['dragleave','drop'].forEach(e=>{
+  dropzone.addEventListener(e, ()=> dropzone.classList.remove('dragover'));
+});
+dropzone.addEventListener('drop', e => handleFiles(e.dataTransfer.files));
+
+function handleFiles(files) {
+  const cat = document.getElementById('upload-cat').value;
+  const queue = document.getElementById('upload-queue');
+  Array.from(files).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const id = 'up_'+Math.random().toString(36).slice(2,10);
+    const item = document.createElement('div');
+    item.className = 'upload-item';
+    item.id = id;
+    const url = URL.createObjectURL(file);
+    // simulate AI score based on file size + randomness
+    const score = (5 + Math.random()*4.5).toFixed(1);
+    const price = calculatePrice(parseFloat(score));
+    item.innerHTML = `
+      <img class="upload-thumb" src="${url}" alt="">
+      <div class="upload-info">
+        <div class="name">${esc(file.name)}</div>
+        <div class="meta">${formatBytes(file.size)} · Score ${score} → Preis ${price.toFixed(2)} €</div>
+      </div>
+      <div class="upload-progress">
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="${id}_bar"></div></div>
+      </div>
+      <div class="upload-status" id="${id}_status">0%</div>
+    `;
+    queue.appendChild(item);
+
+    // simulate upload progress
+    let prog = 0;
+    const iv = setInterval(()=>{
+      prog += 5 + Math.random()*15;
+      if (prog > 100) prog = 100;
+      document.getElementById(id+'_bar').style.width = prog+'%';
+      document.getElementById(id+'_status').textContent = Math.floor(prog)+'%';
+      if (prog >= 100) {
+        clearInterval(iv);
+        document.getElementById(id+'_status').textContent = '✅';
+        document.getElementById(id+'_status').className = 'upload-status done';
+        // add to library
+        images.unshift({
+          id: nextId++, title: file.name.replace(/\.[^.]+$/,''),
+          cat: cat || 'abstract', price, score: parseFloat(score),
+          date: new Date().toISOString().slice(0,10), sales:0, thumb: url
+        });
+        refreshAll();
+        toast(`"${file.name}" hochgeladen`, 'success');
+      }
+    }, 200);
+  });
+}
+
+function calculatePrice(score) {
+  // price curve: base 5€ + score multiplier
+  return Math.max(0.99, 5 + score * 1.5);
+}
+
+/* ===================== IMAGE LIST ===================== */
+function renderImages() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const cat = document.getElementById('filter-cat').value;
+  const sort = document.getElementById('filter-sort').value;
+  let list = images.filter(i => {
+    if (cat && i.cat !== cat) return false;
+    if (q && !i.title.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  const sortFn = {
+    newest: (a,b)=>b.id-a.id,
+    oldest: (a,b)=>a.id-b.id,
+    'price-h': (a,b)=>b.price-a.price,
+    'price-l': (a,b)=>a.price-b.price,
+    'score-h': (a,b)=>b.score-a.score,
+  };
+  list.sort(sortFn[sort] || sortFn.newest);
+  const tbody = document.getElementById('img-tbody');
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:40px;">Keine Bilder gefunden</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(img => `
+    <tr>
+      <td><div class="img-cell"><img src="${img.thumb}" alt=""><div><div class="title">${esc(img.title)}</div><div class="sub">ID: ${img.id}</div></div></div></td>
+      <td><span class="tag tag-${img.cat}">${catLabel(img.cat)}</span></td>
+      <td><input type="number" class="price-input" value="${img.price.toFixed(2)}" step="0.01" min="0"
+        onchange="updatePrice(${img.id}, this.value)"> €</td>
+      <td>${img.score}</td>
+      <td>${img.date}</td>
+      <td>
+        <div class="actions">
+          <button class="btn-edit" onclick="openEdit(${img.id})">✏️</button>
+          <button class="btn-del" onclick="deleteImage(${img.id})">🗑️</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function updatePrice(id, val) {
+  const img = images.find(i=>i.id===id);
+  if (img) { img.price = parseFloat(val)||0; toast('Preis aktualisiert','info'); refreshAll(); }
+}
+function deleteImage(id) {
+  if (!confirm('Bild wirklich löschen?')) return;
+  images = images.filter(i=>i.id!==id);
+  toast('Bild gelöscht','success');
+  refreshAll();
+}
+function openEdit(id) {
+  const img = images.find(i=>i.id===id);
+  if (!img) return;
+  editingId = id;
+  document.getElementById('edit-title').value = img.title;
+  document.getElementById('edit-cat').value = img.cat;
+  document.getElementById('edit-price').value = img.price.toFixed(2);
+  document.getElementById('edit-tags').value = '';
+  document.getElementById('edit-desc').value = '';
+  document.getElementById('editModal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('editModal').classList.remove('open');
+  editingId = null;
+}
+function saveEdit() {
+  const img = images.find(i=>i.id===editingId);
+  if (img) {
+    img.title = document.getElementById('edit-title').value;
+    img.cat = document.getElementById('edit-cat').value;
+    img.price = parseFloat(document.getElementById('edit-price').value)||0;
+  }
+  closeModal();
+  toast('Änderungen gespeichert','success');
+  refreshAll();
+}
+
+/* ===================== STATS ===================== */
+function refreshStats() {
+  const total = images.length;
+  const today = new Date().toISOString().slice(0,10);
+  const salesToday = images.filter(i => i.date === today).reduce((s,i) => s + (i.sales||0), 0);
+  const revToday = images.filter(i => i.date === today).reduce((s,i) => s + (i.sales||0)*i.price, 0);
+  // week
+  const weekAgo = new Date(Date.now()-7*86400000).toISOString().slice(0,10);
+  const weekSales = images.filter(i => i.date >= weekAgo).reduce((s,i) => s + (i.sales||0), 0);
+  const weekRev = images.filter(i => i.date >= weekAgo).reduce((s,i) => s + (i.sales||0)*i.price, 0);
+  const avgPrice = total ? (images.reduce((s,i)=>s+i.price,0)/total).toFixed(2) : '0.00';
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-sales').textContent = salesToday;
+  document.getElementById('stat-revenue').textContent = revToday.toFixed(2) + ' €';
+  document.getElementById('stat-week').textContent = weekSales;
+  document.getElementById('stat-week-rev').textContent = weekRev.toFixed(2) + ' €';
+  document.getElementById('stat-avg-price').textContent = avgPrice + ' €';
+}
+
+/* ===================== UTILS ===================== */
+function refreshAll() {
+  refreshDashboard();
+  renderImages();
+  refreshStats();
+}
+function esc(str) {
+  const d = document.createElement('div');
+  d.textContent = str; return d.innerHTML;
+}
+function catLabel(c) {
+  return {nature:'Natur', urban:'Urban', abstract:'Abstrakt', portrait:'Portrait'}[c] || c;
+}
+function formatBytes(b) {
+  if (b < 1024) return b+' B';
+  if (b < 1024*1024) return (b/1024).toFixed(1)+' KB';
+  return (b/(1024*1024)).toFixed(1)+' MB';
+}
+function toast(msg, type='info') {
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(()=>el.remove(), 3000);
+}
+
+// Enter key on login
+['login-user','login-pass'].forEach(id=>{
+  document.getElementById(id).addEventListener('keypress', e=>{
+    if (e.key==='Enter') doLogin();
+  });
+});
+</script>
+</body>
+</html>
