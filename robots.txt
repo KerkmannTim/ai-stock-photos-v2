@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /backend/
+Disallow: /js/
+Disallow: /css/
+Disallow: /scripts/
+
+Sitemap: https://pixel-forge.ai/sitemap.xml
