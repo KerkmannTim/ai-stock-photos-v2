@@ -228,7 +228,7 @@
     showPaymentModal('processing', itemNames, total);
 
     try {
-      const res = await fetch('http://localhost:3001/api/create-checkout-session', {
+      const res = await fetch('http://187.124.22.6:3001/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ image_ids: imageIds })

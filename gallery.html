@@ -3,8 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galerie — StockPhotoShop</title>
-  <meta name="description" content="Durchstöbere über 50.000 KI-generierte Stock-Fotos. Filtere nach Kategorie, Preis und Qualitätsscore.">
+  <title>Galerie — Pixel-Forge.ai</title>
+  <meta name="description" content="Entdecke 50.000+ KI-generierte Stock-Fotos bei Pixel-Forge.ai. Filtere nach Kategorie, Preis und Ästhetik-Score. Lizenzfreie Bilder ab €0,09.">
+  <meta name="keywords" content="KI Stock Fotos, Pixel-Forge.ai, Bildergalerie, lizenzfreie Bilder, KI-generierte Fotos, Stockfoto Shop, Ästhetik Score, Bilder kaufen, Pixel Forge Galerie">
+  <meta name="author" content="Pixel-Forge.ai">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="canonical" href="https://pixel-forge.ai/gallery.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='0' y='24' font-size='24'%3E%F0%9F%93%B8%3C/text%3E%3C/svg%3E">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Galerie — 50.000+ KI-generierte Stock-Fotos">
+  <meta property="og:description" content="Durchstöbere 50.000+ KI-generierte Stock-Fotos. Filtere nach Kategorie, Preis und Ästhetik-Score. Ab €0,09 pro Bild.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pixel-forge.ai/gallery.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&h=630&fit=crop">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="Pixel-Forge.ai">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Galerie — 50.000+ KI-generierte Stock-Fotos">
+  <meta name="twitter:description" content="Durchstöbere 50.000+ KI-generierte Stock-Fotos. Filtere nach Kategorie, Preis und Ästhetik-Score.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&h=630&fit=crop">
+
+  <!-- Schema.org: ItemList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Pixel-Forge.ai Bildergalerie",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Natur",
+        "url": "https://pixel-forge.ai/gallery.html?category=natur"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Architektur",
+        "url": "https://pixel-forge.ai/gallery.html?category=architektur"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Business",
+        "url": "https://pixel-forge.ai/gallery.html?category=business"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Technologie",
+        "url": "https://pixel-forge.ai/gallery.html?category=technologie"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Kreativ",
+        "url": "https://pixel-forge.ai/gallery.html?category=kreativ"
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "name": "Menschen",
+        "url": "https://pixel-forge.ai/gallery.html?category=menschen"
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,7 +90,7 @@
     <div class="container navbar-inner">
       <a href="index.html" class="logo">
         <span class="logo-icon">📸</span>
-        <span>StockPhotoShop</span>
+        <span>Pixel-Forge.ai</span>
       </a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
@@ -139,7 +207,7 @@
         <div class="footer-brand">
           <a href="index.html" class="logo">
             <span class="logo-icon">📸</span>
-            <span>StockPhotoShop</span>
+            <span>Pixel-Forge.ai</span>
           </a>
           <p>Hochwertige KI-generierte Stock-Fotos für Kreative, Entwickler und Unternehmen.</p>
         </div>
@@ -172,7 +240,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 StockPhotoShop. Alle Rechte vorbehalten.</p>
+        <p>© 2026 Pixel-Forge.ai. Alle Rechte vorbehalten.</p>
         <p>Made with AI</p>
       </div>
     </div>
@@ -206,7 +274,7 @@
   (function() {
     'use strict';
 
-    const API_BASE = 'http://localhost:3001';
+    const API_BASE = 'http://187.124.22.6:3001';
     let allImages = [];
     let currentCategory = 'all';
     let currentSort = 'newest';

@@ -1,5 +1,5 @@
 /**
- * StockPhotoShop v2 — App JavaScript
+ * Pixel-Forge.ai v2 — App JavaScript
  * Professional dark-theme stock photo marketplace
  */
 

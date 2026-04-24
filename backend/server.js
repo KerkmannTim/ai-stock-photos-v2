@@ -8,6 +8,9 @@ require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || '';
 
+// E-Mail-Modul für Kauf-Bestätigungen
+const { sendPurchaseEmail, verifyDownloadToken } = require('./routes/email');
+
 const app = express();
 const PORT = parseInt(process.env.SERVER_PORT || process.env.API_PORT, 10) || 3001;
 const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'database.sqlite');
@@ -33,7 +36,34 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
   }
   console.log('Connected to SQLite database at', DB_PATH);
   initTables();
+  migratePurchasesTable(); // Neue Spalten für E-Mail-Tracking hinzufügen
 });
+
+/**
+ * Migration: Fügt fehlende Spalten zur purchases-Tabelle hinzu (SQLite-safe).
+ */
+function migratePurchasesTable() {
+  // Prüfe, ob Spalten existieren (SQLite hat kein ALTER ADD COLUMN IF NOT EXISTS)
+  db.all("PRAGMA table_info(purchases)", [], (err, cols) => {
+    if (err) {
+      console.error('Migration error (table_info):', err.message);
+      return;
+    }
+    const names = new Set(cols.map((c) => c.name));
+    if (!names.has('email_sent')) {
+      db.run('ALTER TABLE purchases ADD COLUMN email_sent INTEGER NOT NULL DEFAULT 0', (err) => {
+        if (err) console.error('Migration error (email_sent):', err.message);
+        else console.log('[MIGRATION] Spalte email_sent hinzugefügt.');
+      });
+    }
+    if (!names.has('invoice_number')) {
+      db.run('ALTER TABLE purchases ADD COLUMN invoice_number TEXT', (err) => {
+        if (err) console.error('Migration error (invoice_number):', err.message);
+        else console.log('[MIGRATION] Spalte invoice_number hinzugefügt.');
+      });
+    }
+  });
+}
 
 function initTables() {
   db.exec(`
@@ -63,6 +93,8 @@ function initTables() {
       image_id INTEGER NOT NULL,
       amount_cents INTEGER NOT NULL DEFAULT 0,
       purchased_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      email_sent INTEGER NOT NULL DEFAULT 0,  -- 0 = ungesendet, 1 = gesendet
+      invoice_number TEXT,                  -- Rechnungsnummer aus Bestätigungsmail
       FOREIGN KEY (image_id) REFERENCES images(id)
     );
   `, (err) => {
@@ -218,8 +250,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: success_url || `http://localhost:3001/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: cancel_url || `http://localhost:3001/cancel.html`,
+      success_url: success_url || `http://187.124.22.6:3001/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: cancel_url || `http://187.124.22.6:3001/cancel.html`,
       metadata: {
         image_ids: JSON.stringify(image_ids),
         user_id: user_id,
@@ -274,6 +306,8 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
     case 'checkout.session.completed': {
       const session = event.data.object;
       await recordPurchase(session);
+      // E-Mail-Bestätigung nach erfolgreichem Checkout senden
+      await sendPurchaseConfirmation(session);
       break;
     }
     case 'payment_intent.succeeded': {
@@ -332,6 +366,83 @@ async function recordPurchase(session) {
   }
 }
 
+/**
+ * Sendet E-Mail-Bestätigung nach erfolgreichem Checkout.
+ * Verhindert Doppel-E-Mails durch Prüfung von email_sent.
+ */
+async function sendPurchaseConfirmation(session) {
+  try {
+    const imageIds = JSON.parse(session.metadata?.image_ids || '[]');
+    const userId = session.metadata?.user_id || 'anonymous';
+    const totalCents = parseInt(session.metadata?.total_cents || '0', 10);
+    const customerEmail = session.customer_details?.email || session.customer_email;
+
+    if (!customerEmail) {
+      console.warn('[EMAIL] Keine Kunden-E-Mail in Session vorhanden, überspringe Bestätigung.');
+      return;
+    }
+    if (!Array.isArray(imageIds) || imageIds.length === 0) {
+      console.warn('[EMAIL] Keine image_ids vorhanden, überspringe Bestätigung.');
+      return;
+    }
+
+    // Prüfe, ob E-Mail bereits gesendet wurde (keine Doppel-E-Mails)
+    const alreadySent = await new Promise((resolve, reject) => {
+      db.get(
+        'SELECT COUNT(*) AS cnt FROM purchases WHERE user_id = ? AND image_id IN (' + imageIds.map(() => '?').join(',') + ') AND email_sent = 1',
+        [userId, ...imageIds],
+        (err, row) => {
+          if (err) reject(err);
+          else resolve(row?.cnt || 0);
+        }
+      );
+    });
+
+    if (alreadySent > 0) {
+      console.log(`[EMAIL] Bestätigung wurde bereits gesendet (Session: ${session.id}), überspringe.`);
+      return;
+    }
+
+    // Bild-Details laden (inkl. Titel und Preis)
+    const placeholders = imageIds.map(() => '?').join(',');
+    const images = await new Promise((resolve, reject) => {
+      db.all(`SELECT id, title, price_cents FROM images WHERE id IN (${placeholders})`, imageIds, (err, rows) => {
+        if (err) reject(err);
+        else resolve(rows);
+      });
+    });
+
+    const result = await sendPurchaseEmail(customerEmail, {
+      userId,
+      images,
+      totalCents,
+      sessionId: session.id,
+      purchasedAt: new Date().toISOString(),
+    });
+
+    if (result.success) {
+      // Markiere alle gekauften Bilder als "E-Mail gesendet"
+      const invoiceNumber = result.info?.invoiceNumber || null;
+      await new Promise((resolve, reject) => {
+        db.run(
+          'UPDATE purchases SET email_sent = 1, invoice_number = ? WHERE user_id = ? AND image_id IN (' + placeholders + ')',
+          [invoiceNumber, userId, ...imageIds],
+          (err) => {
+            if (err) reject(err);
+            else resolve();
+          }
+        );
+      });
+      console.log(`[EMAIL] Bestätigung für Session ${session.id} verarbeitet. Rechnung: ${invoiceNumber}`);
+    } else {
+      console.error(`[EMAIL] Versand fehlgeschlagen für Session ${session.id}:`, result.error);
+    }
+
+  } catch (err) {
+    console.error('[EMAIL] Fehler in sendPurchaseConfirmation:', err.message);
+  }
+}
+
 // ── PURCHASE HISTORY ──
 
 /**
@@ -356,6 +467,58 @@ app.get('/api/purchases/:userId', (req, res) => {
       res.json({ purchases: rows });
     }
   );
+});
+
+/**
+ * GET /api/download/:token
+ * Signierter Download-Link für gekaufte Bilder (24h gültig).
+ */
+app.get('/api/download/:token', async (req, res) => {
+  try {
+    const { token } = req.params;
+    const payload = verifyDownloadToken(token);
+
+    if (!payload) {
+      return res.status(403).json({ error: 'Ungültiger oder abgelaufener Download-Link.' });
+    }
+
+    const { imageId, userId } = payload;
+
+    // Prüfe, ob der Nutzer das Bild tatsächlich gekauft hat
+    const purchase = await new Promise((resolve, reject) => {
+      db.get(
+        'SELECT 1 FROM purchases WHERE user_id = ? AND image_id = ?',
+        [userId, imageId],
+        (err, row) => {
+          if (err) reject(err);
+          else resolve(row);
+        }
+      );
+    });
+
+    if (!purchase) {
+      return res.status(403).json({ error: 'Zugriff verweigert — Bild nicht gekauft.' });
+    }
+
+    // Bild-Datei-Pfad ermitteln
+    const image = await new Promise((resolve, reject) => {
+      db.get('SELECT path, filename FROM images WHERE id = ?', [imageId], (err, row) => {
+        if (err) reject(err);
+        else resolve(row);
+      });
+    });
+
+    if (!image || !image.path) {
+      return res.status(404).json({ error: 'Bild nicht gefunden.' });
+    }
+
+    const filePath = path.join(__dirname, image.path);
+    res.download(filePath, image.filename || `bild-${imageId}.jpg`);
+
+  } catch (err) {
+    console.error('[DOWNLOAD] Fehler:', err.message);
+    res.status(500).json({ error: 'Download-Fehler.' });
+  }
 });
 
 // Legacy cart checkout (simulated) — kept for backward compatibility
